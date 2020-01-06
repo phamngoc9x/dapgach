@@ -1,51 +1,74 @@
 var canvas = document.getElementById('game');
 var context = canvas.getContext('2d');
 
-var x = 20, y = 20;
-var dx = 5, dy = 2;
-var radius = 20;
+var ball = {
+  x: 20,
+  y: 20,
+  dx: 5,
+  dy: 2,
+  radius: 10,
+}
 
 var paddle = {
   width: 70,
   height: 10,
   x: 0,
-  y: canvas.height - 30,
+  y: canvas.height - 10,
   speed: 10,
   isMovingLeft: false,
   isMovingRight: false,
 }
 
+var gameLife = 3;
+var gameScore = 0;
+
+var brickConfig = {
+  offsetX: 25,
+  offsetY: 25,
+  margin: 25,
+  width: 70,
+  height: 15,
+  totalRow: 3,
+  totalCol: 5
+}
+
+var brickList = [];
+
+for(var i = 0; i < brickConfig.totalRow; i++) {
+  for(var j = 0; j < brickConfig.totalCol; j++) {
+    brickList.push({
+      x: brickConfig.offsetX + j * (brickConfig.width + brickConfig.margin),
+      y: brickConfig.offsetY + i * (brickConfig.height + brickConfig.margin),
+      isBroken: false
+    })
+  }
+}
+
+
+
 document.addEventListener('keyup', function(event){
-  console.log('key up')
-  console.log(event)
 
   if(event.keyCode == 37) {
 
     paddle.isMovingLeft = false;
-    //paddle.x -=paddle.speed;
   }
   else if(event.keyCode == 39) {
     paddle.isMovingRight = false;
-    // paddle.x +=paddle.speed;
   }
 })
 document.addEventListener('keydown', function(event){
-  console.log('key down')
-  console.log(event)
 
   if(event.keyCode == 37) {
     paddle.isMovingLeft = true;
-    //paddle.x -=paddle.speed;
   }
   else if(event.keyCode == 39) {
     paddle.isMovingRight = true;
-    // paddle.x +=paddle.speed;
   }
 })
 
 function drawBall() {
     context.beginPath()
-    context.arc(x, y, radius, 0, 2* Math.PI, false);
+    context.arc(ball.x, ball.y, ball.radius, 0, 2* Math.PI, false);
     context.fillStyle = 'red';
     context.fill();
     context.closePath()
@@ -59,30 +82,54 @@ function drawPaddle() {
     context.closePath()
 }
 
+function drawBricks() {
+  brickList.forEach(function(b){
+    if(b.isBroken ==false) {
+      context.beginPath();
+      context.rect(b.x, b.y, brickConfig.width, brickConfig.height);
+      context.fill();
+      context.closePath();
+    }
+    
+  })
 
+}
 
 function handleBall() {
-  if(x < radius || x > canvas.width - radius) {
-    dx = -dx;
+  if(ball.x < ball.radius || ball.x > canvas.width - ball.radius) {
+    ball.dx = -ball.dx;
   }
-  if(y < radius || y > canvas.height - radius) {
-    dy = -dy;
+  if(ball.y < ball.radius || ball.y > canvas.height - ball.radius) {
+    ball.dy = -ball.dy;
   }
 }
 
 function updateBallPosition() {
-  x += dx;
-  y += dy;
+  ball.x += ball.dx;
+  ball.y += ball.dy;
 }
 
+function handleBallPaddle() {
+  if(ball.x + ball.radius >= paddle.x &&  ball.x + ball.radius <= paddle.x + paddle.width && ball.y + ball.radius>= canvas.height-paddle.height){
+    ball.dy = -ball.dy;
+    gameScore = gameScore + 1;
+    console.log('score ' + gameScore);
+  }
+}
 
+function handleBallBrick() {
+  brickList.forEach(function(b) {
+    if(!b.isBroken) {
+      if(ball.x >= b.x && ball.x <=b.x + brickConfig.width && 
+        ball.y + ball.radius >= b.y && ball.y - ball.radius <= b.y + brickConfig.height) {
+        ball.dy = -ball.dy;
+        b.isBroken = true;
+      }
+    }
+  })
+}
 
-function draw() {
-  context.clearRect(0,0, canvas.clientWidth, canvas.clientHeight);
-    //draw ball
-  drawBall();
-  drawPaddle();
-
+function updatePaddlePosition() {
   if(paddle.isMovingLeft) {
     paddle.x -=paddle.speed;
   }
@@ -95,11 +142,35 @@ function draw() {
   } else if(paddle.x > canvas.width - paddle.width) {
     paddle.x = canvas.width - paddle.width;
   }
+}
 
-  handleBall();
-  updateBallPosition();
-    
-  requestAnimationFrame(draw);
+function checkGameLife() {
+  if(ball.y > canvas.height - ball.radius) {
+    gameLife = gameLife - 1;
+    console.log('game life' + gameLife);
+  }
+}
+
+
+function draw() {
+  if(gameLife <= 3 && gameLife > 0) {
+    context.clearRect(0,0, canvas.clientWidth, canvas.clientHeight);
+    drawBall();
+    drawPaddle();
+    drawBricks();
+
+    handleBall();
+    handleBallPaddle();
+    handleBallBrick();
+  
+    updateBallPosition();
+    updatePaddlePosition();
+    checkGameLife();
+
+    requestAnimationFrame(draw);
+  } else if(gameLife === 0) {
+    console.log('game over');
+  }
 }
 
 draw();
