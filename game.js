@@ -2,8 +2,8 @@ var canvas = document.getElementById('game');
 var context = canvas.getContext('2d');
 
 var ball = {
-  x: 20,
-  y: 20,
+  x: 200,
+  y: 200,
   dx: 5,
   dy: 2,
   radius: 10,
@@ -66,6 +66,30 @@ document.addEventListener('keydown', function(event){
   }
 })
 
+function drawScore(score) {
+  context.beginPath();
+  context.rect(10, 10, 10, 10);
+  context.fillText(score, canvas.width - 30, canvas.height - 30);
+  context.font = "20px Georgia";
+  context.fillStyle = 'transparent';
+  context.fill();
+  context.closePath();
+}
+
+function drawImages(score) {
+  context.beginPath();
+  context.rect(40, 40, 40, 40);
+  if (score <= 2) {
+    var img = document.getElementById("im1");
+  } else {
+    var img = document.getElementById("im2");
+  }
+  context.drawImage(img,canvas.width - 100, canvas.height - 100,40,40);
+  context.fillStyle = 'transparent';
+  context.fill();
+  context.closePath();
+}
+
 function drawBall() {
     context.beginPath()
     context.arc(ball.x, ball.y, ball.radius, 0, 2* Math.PI, false);
@@ -90,7 +114,7 @@ function drawBricks() {
       context.fill();
       context.closePath();
     }
-    
+
   })
 
 }
@@ -105,22 +129,24 @@ function handleBall() {
 }
 
 function updateBallPosition() {
-  ball.x += ball.dx;
-  ball.y += ball.dy;
+  ball.y += -ball.dy;
 }
 
 function handleBallPaddle() {
   if(ball.x + ball.radius >= paddle.x &&  ball.x + ball.radius <= paddle.x + paddle.width && ball.y + ball.radius>= canvas.height-paddle.height){
+    ball.dx = -ball.dx;
     ball.dy = -ball.dy;
     gameScore = gameScore + 1;
     console.log('score ' + gameScore);
   }
+  drawScore(gameScore);
+  drawImages(gameScore);
 }
 
 function handleBallBrick() {
   brickList.forEach(function(b) {
     if(!b.isBroken) {
-      if(ball.x >= b.x && ball.x <=b.x + brickConfig.width && 
+      if(ball.x >= b.x && ball.x <=b.x + brickConfig.width &&
         ball.y + ball.radius >= b.y && ball.y - ball.radius <= b.y + brickConfig.height) {
         ball.dy = -ball.dy;
         b.isBroken = true;
@@ -155,14 +181,15 @@ function checkGameLife() {
 function draw() {
   if(gameLife <= 3 && gameLife > 0) {
     context.clearRect(0,0, canvas.clientWidth, canvas.clientHeight);
-    drawBall();
+    drawBall(Math.random(ball.x),Math.random(ball.y));
     drawPaddle();
     drawBricks();
+    drawScore(gameScore);
 
     handleBall();
     handleBallPaddle();
     handleBallBrick();
-  
+
     updateBallPosition();
     updatePaddlePosition();
     checkGameLife();
