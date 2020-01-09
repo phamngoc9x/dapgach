@@ -2,32 +2,30 @@
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 var screenHeight = 600;
-var screenWidth = 600;
+var screenWidth = 400;
 var shapes = {};
 var shapeIndex = 0;
+var dudeWidth = 70;
+var dudeHeight = 10;
 var score = 0;
 var life = 3;
 var fallSpeed = 2;
 var shapeGenerateSpeed = 1000;
 
-canvas.width = 600;
+canvas.width = 400;
 canvas.height = 600;
 
-// $(document).mousemove(function(e){
-//   dude.Position.X = e.pageX;
-//   dude.Position.Y = e.pageY;
-// })
+$(document).mousemove(function(e){
+  dude.Position.X = e.pageX;
+})
+
 
 $(document).keydown(function(e){
     // console.log(e.which);
-    if (e.which == 65){
-      dude.Velocity.X = -5;
-    } else if (e.which == 87){
-      dude.Velocity.Y = -5;
-    } else if (e.which == 68){
-      dude.Velocity.X = 5;
-    } else if (e.which == 83){
-      dude.Velocity.Y = 5;
+    if (e.which == 37){
+      dude.Velocity.X = -10;
+    } else if (e.which == 39){
+      dude.Velocity.X = 10;
     }
 });
 $(document).keyup(function(){
@@ -48,22 +46,22 @@ function Shape(posX, width, height) {
     this.Index = shapeIndex;
 
     shapes[shapeIndex] = this;
-    shapeIndex++
+    shapeIndex++;
 
     this.checkCollisions = function() {
       if(this.Position.Y >= screenHeight){
         delete shapes[this.Index];
-        life --
+        life --;
         $(".life").html(life);
         if(life === 0) {
           $(".life").html('Game over');
           clearInterval(intervalUpdate);
         }
-        
       }
     }
     this.updatePosition = function() {
-        this.Position.Y += this.Velocity;
+      this.Position.Y += this.Velocity;
+
     }
     this.Draw = function() {
         ctx.beginPath();
@@ -104,7 +102,12 @@ function Dude(posX, width, height){
   }
   this.updatePosition = function(){
     this.Position.X += this.Velocity.X;
-    this.Position.Y += this.Velocity.Y;
+    if(this.Position.X< 0) {
+      this.Position.X = 0;
+    } else if(this.Position.X > 330) {
+      this.Position.X = 330;
+    }
+    //this.Position.Y += this.Velocity.Y;
   }
   this.Draw = function(){
     ctx.beginPath();
@@ -120,10 +123,10 @@ function Dude(posX, width, height){
 }
 
 
-var dude = new Dude(screenWidth/2, 70, 10);
+var dude = new Dude((screenWidth - dudeWidth)/2 , dudeWidth, dudeHeight);
 
 function newGame(){
-  dude = new Dude(screenWidth/2, 70, 10);
+  dude = new Dude((screenWidth - dudeWidth)/2, dudeWidth, dudeHeight);
   shapes = {};
   score = 0;
   life = 3;
@@ -131,7 +134,7 @@ function newGame(){
 
 
 function shapeGenerate(){
-  new Shape(Math.random()*screenWidth,30,30);
+  new Shape(Math.random()*(screenWidth - 50),30,30);
 }
 
 function Updater() {
@@ -144,4 +147,3 @@ function Updater() {
 
 intervalUpdate= setInterval(Updater, 10);
 intervalShape= setInterval(shapeGenerate, shapeGenerateSpeed);
-
