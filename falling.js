@@ -15,6 +15,29 @@ var shapeGenerateSpeed = 1000;
 canvas.width = 400;
 canvas.height = 600;
 
+
+
+function itemNone(x) {
+  for (var i = 0; i < x.length; i++) {
+    x[i].style.display = 'none';
+  }
+}
+
+function drawImages(score) {
+  var item = document.querySelectorAll('.level-image__item');
+  if (score <= 5) {
+    itemNone(item);
+    document.querySelector("#im1").style.display = 'block';
+  } else if (score > 5 && score <= 10) {
+    itemNone(item);
+    document.querySelector("#im2").style.display = 'block';
+  }
+  else if (score > 10){
+    itemNone(item);
+    document.querySelector("#im3").style.display = 'block';
+  }
+}
+
 $(document).mousemove(function(e){
   dude.Position.X = e.pageX;
 })
@@ -97,6 +120,7 @@ function Dude(posX, width, height){
         delete shapes[i];
         score++;
         $(".score").html(score);
+        drawImages(score);
       }
     }
   }

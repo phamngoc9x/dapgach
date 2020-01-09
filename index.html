@@ -12,17 +12,40 @@
 		.d-none {
 			display: none;
 		}
+		.row {
+			display: flex;
+		}
+		.col-6 {
+			width: 50%;
+		}
+		.level-image__item {
+			transition: all 0.5s;
+			animation: scale 2s infinite;
+		}
+		@keyframes scale {
+			0%   { transform: scale(1.1); }
+			50% { transform: scale(1); }
+			100% { transform: scale(1.1); }
+		}
 	</style>
 </head>
 <body>
-	
-	<canvas id="canvas"></canvas>
-	<h1>Score: <span class="score">0</span></h1></div>
-	<h1>Life: <span class="life">3</span></h1></div>
-	
+	<div class="row">
+			<div class="col-6">
+				<canvas id="canvas"></canvas>
+			</div>
+			<div class="col-6">
+				<h1>Score: <span class="score">0</span></h1>
+				<h1>Life: <span class="life">3</span></h1>
+				<div class="level-image">
+					<img src="https://dotobjyajpegd.cloudfront.net/photo/5d3a66f962710e25dc99ffa3" id="im1" width="100" height="auto" class="level-image__item d-none"/>
+					<img src="http://thuvienanhdep.net/wp-content/uploads/2016/10/hinh-anh-dep-nhat-the-gioi-ve-su-hoan-hao-khien-moi-nguoi-ngo-ngang2.jpg" id="im2" width="100" height="auto" class="level-image__item d-none"/>
+					<img src="https://i.pinimg.com/474x/df/f5/3b/dff53b68ebc10ceff41de6dd260932f6.jpg" id="im3" width="100" height="auto" class="level-image__item d-none"/>
+				</div>
+			</div>
+	</div>
+
 	<!-- <canvas id="game" height="500" width="500"></canvas> -->
-	<img src="https://cdn.icon-icons.com/icons2/1674/PNG/512/person_110935.png" id="im1" class="d-none"/>
-	<img src="https://f0.pngfuel.com/png/518/64/person-icon-png-clip-art.png" id="im2" class="d-none"/>
 	<!-- <script src="game.js"></script> -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
 	<script src="falling.js"></script>
