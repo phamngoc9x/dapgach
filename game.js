@@ -2,8 +2,8 @@ var canvas = document.getElementById('game');
 var context = canvas.getContext('2d');
 
 var ball = {
-  x: 200,
-  y: 200,
+  x: 20,
+  y: 20,
   dx: 5,
   dy: 2,
   radius: 10,
