@@ -181,7 +181,7 @@ function checkGameLife() {
 function draw() {
   if(gameLife <= 3 && gameLife > 0) {
     context.clearRect(0,0, canvas.clientWidth, canvas.clientHeight);
-    drawBall(Math.random(ball.x),Math.random(ball.y));
+    drawBall(ball.x,ball.y);
     drawPaddle();
     drawBricks();
     drawScore(gameScore);
