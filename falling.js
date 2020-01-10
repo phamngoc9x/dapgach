@@ -5,12 +5,14 @@ var screenHeight = 600;
 var screenWidth = 400;
 var shapes = {};
 var shapeIndex = 0;
-var dudeWidth = 70;
-var dudeHeight = 10;
+var dudeWidth = 80;
+var dudeHeight = 80;
+var dudeSrc = 'asset/b332c923997c2a98529ff4ff6189c111.png'
+var ballSrc = 'asset/banhchung.png'
 var score = 0;
 var life = 3;
 var fallSpeed = 2;
-var shapeGenerateSpeed = 1000;
+var shapeGenerateSpeed = 1200;
 
 canvas.width = 400;
 canvas.height = 600;
@@ -39,12 +41,12 @@ function drawImages(score) {
 }
 
 $(document).mousemove(function(e){
-  dude.Position.X = e.pageX;
+  console.log()
+  dude.Position.X = e.pageX - 100;
 })
 
 
 $(document).keydown(function(e){
-    // console.log(e.which);
     if (e.which == 37){
       dude.Velocity.X = -10;
     } else if (e.which == 39){
@@ -82,22 +84,26 @@ function Shape(posX, width, height) {
         }
       }
     }
+
     this.updatePosition = function() {
       this.Position.Y += this.Velocity;
-
     }
+
     this.Draw = function() {
         ctx.beginPath();
-        ctx.rect(this.Position.X, this.Position.Y, this.Width, this.Height);
-        ctx.fillStyle = this.Color;
+        var banhchungIcon = new Image()
+        banhchungIcon.src = ballSrc
+        ctx.drawImage(banhchungIcon, this.Position.X, this.Position.Y, this.Width, this.Height);
         ctx.fill();
     }
+
     this.update = function(){
         this.checkCollisions();
         this.updatePosition();
         this.Draw();
     }
 }
+
 function Dude(posX, width, height){
   this.Width = width;
   this.Height = height;
@@ -135,8 +141,9 @@ function Dude(posX, width, height){
   }
   this.Draw = function(){
     ctx.beginPath();
-    ctx.rect(this.Position.X, this.Position.Y, this.Width, this.Height);
-    ctx.fillStyle = this.Color;
+    var dudeIcon = new Image()
+    dudeIcon.src = dudeSrc
+    ctx.drawImage(dudeIcon, this.Position.X, this.Position.Y, this.Width, this.Height);
     ctx.fill();
   }
   this.update = function(){
@@ -158,7 +165,7 @@ function newGame(){
 
 
 function shapeGenerate(){
-  new Shape(Math.random()*(screenWidth - 50),30,30);
+  new Shape(Math.random()*(screenWidth - 50), 40, 40);
 }
 
 function Updater() {

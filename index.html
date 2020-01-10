@@ -7,12 +7,31 @@
 	<title>Đập gack</title>
 	<style>
 		canvas {
-      border: 1px solid #eee;
-    }
+			position: absolute;
+			/* border: 1px solid #000; */
+			top: 15vh;
+			left: 16.6vw;
+			z-index: 2;
+		}
+		body {
+			overflow: hidden;
+			height: 100vh;
+			margin: 0;
+			width: 100vw;
+			background: url('asset/Artboard 1.png') no-repeat;
+			background-size: cover;
+		}
+		.mockup-phone {
+			position: absolute;
+			top: 10vh;
+			left: 15vw;
+			z-index: 1;
+		}
 		.d-none {
 			display: none;
 		}
 		.row {
+			position: relative;
 			display: flex;
 		}
 		.col-6 {
@@ -32,6 +51,7 @@
 <body>
 	<div class="row">
 			<div class="col-6">
+				<img src="asset/dienthoai.png" class="mockup-phone" alt="">
 				<canvas id="canvas"></canvas>
 			</div>
 			<div class="col-6">
