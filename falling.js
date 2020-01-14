@@ -11,8 +11,8 @@ var dudeSrc = 'asset/b332c923997c2a98529ff4ff6189c111.png'
 var ballSrc = 'asset/banhchung.png'
 var score = 0;
 var life = 3;
-var fallSpeed = 2;
-var shapeGenerateSpeed = 1200;
+var fallSpeed = 0;
+var shapeGenerateSpeed = 1500;
 
 canvas.width = 400;
 canvas.height = 600;
@@ -80,7 +80,9 @@ function Shape(posX, width, height) {
         $(".life").html(life);
         if(life === 0) {
           $(".life").html('Game over');
-          clearInterval(intervalUpdate);
+          document.getElementById("playbutton").disabled = false;
+          clearInterval();
+          window.cancelAnimationFrame()
         }
       }
     }
@@ -150,6 +152,7 @@ function Dude(posX, width, height){
     this.checkCollisions();
     this.updatePosition();
     this.Draw();
+    requestAnimationFrame(this.update);
   }
 }
 
@@ -166,6 +169,7 @@ function newGame(){
 
 function shapeGenerate(){
   new Shape(Math.random()*(screenWidth - 50), 40, 40);
+  setTimeout(function() { requestAnimationFrame(shapeGenerate)}, 1000);
 }
 
 function Updater() {
@@ -174,7 +178,16 @@ function Updater() {
     shapes[i].update();
   }
   dude.update();
+  requestAnimationFrame(Updater);
 }
 
-intervalUpdate= setInterval(Updater, 10);
-intervalShape= setInterval(shapeGenerate, shapeGenerateSpeed);
+function render() {
+  newGame()
+  shapeGenerate()
+  Updater()
+}
+
+function playButtonClicked() {
+  render();
+  document.getElementById("playbutton").disabled = true;
+}
