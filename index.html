@@ -6,11 +6,22 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Nhận lì xì</title>
 	<style>
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+		}
+		@media (max-width: 990px) {
+			.container {
+				max-width: 100%;
+				margin: 0 30px;
+			}
+		}
+
 		canvas {
 			position: absolute;
 			/* border: 1px solid #000; */
-			top: 15vh;
-			left: 16.6vw;
+			top: calc((100vh - 600px)/2 + 25px);
+			left: 25px;
 			z-index: 2;
 		}
 		body {
@@ -21,11 +32,15 @@
 			background: url('asset/Artboard 1.png') no-repeat;
 			background-size: cover;
 		}
+		main {
+			margin: 100px 0;
+		}
 		.mockup-phone {
 			position: absolute;
-			top: 10vh;
-			left: 15vw;
+			top: calc((100vh - 600px)/2);
+			left: 0;
 			z-index: 1;
+    	max-height: 600px;
 		}
 		.d-none {
 			display: none;
@@ -34,12 +49,22 @@
 			position: relative;
 			display: flex;
 		}
-		.col-6 {
-			width: 50%;
+		.col-8 {
+			width: 66%;
+			padding: 0 15px;
+		}
+		.col-4 {
+			padding: 0 15px;
+			width: 34%;
 		}
 		.level-image__item {
 			transition: all 0.5s;
 			animation: scale 2s infinite;
+		}
+		.banner {
+			max-width: 100%;
+			display: block;
+    	max-height: 100px;
 		}
 		@keyframes scale {
 			0%   { transform: scale(1.1); }
@@ -49,22 +74,47 @@
 	</style>
 </head>
 <body>
-	<div class="row">
-			<div class="col-6">
-				<img src="asset/dienthoai.png" class="mockup-phone" alt="">
-				<canvas id="canvas"></canvas>
+	<main>
+			<div class="container">
+					<div class="row">
+							<div class="col-8">
+								<div class="core-value">
+										<img src="asset/banner1.png" class="banner" alt="">
+								</div>
+								<div class="game-play">
+									<img src="asset/dienthoai.png" class="mockup-phone" alt="">
+									<canvas id="canvas"></canvas>
+								</div>
+							</div>
+							<div class="col-4">
+								<h3>Name: <span class="name">Tran Van A</span></h3>
+								<h3>Score: <span class="score">0</span></h3>
+								<h3>Life: <span class="life">3</span></h3>
+
+								<div class="top-list">
+									<h3>Top điểm cao</h3>
+									<ul class="no-bullets">
+										<li id='top1'>
+											<span class="top-name">???</span><span class="top-score"> 0</span>
+										</li>
+										<li id='top2'>
+											<span class="top-name">???</span><span class="top-score"> 0</span>
+										</li>
+										<li id='top3'>
+											<span class="top-name">???</span><span class="top-score"> 0</span>
+										</li>
+									</ul>
+								</div>
+								<div class="level-image">
+									<img src="https://dotobjyajpegd.cloudfront.net/photo/5d3a66f962710e25dc99ffa3" id="im1" width="100" height="auto" class="level-image__item"/>
+									<img src="http://thuvienanhdep.net/wp-content/uploads/2016/10/hinh-anh-dep-nhat-the-gioi-ve-su-hoan-hao-khien-moi-nguoi-ngo-ngang2.jpg" id="im2" width="100" height="auto" class="level-image__item d-none"/>
+									<img src="https://i.pinimg.com/474x/df/f5/3b/dff53b68ebc10ceff41de6dd260932f6.jpg" id="im3" width="100" height="auto" class="level-image__item d-none"/>
+								</div>
+								<button id="playbutton" onclick="playButtonClicked();">Play</button>
+							</div>
+					</div>
 			</div>
-			<div class="col-6">
-				<h1>Score: <span class="score">0</span></h1>
-				<h1>Life: <span class="life">3</span></h1>
-				<div class="level-image">
-					<img src="https://dotobjyajpegd.cloudfront.net/photo/5d3a66f962710e25dc99ffa3" id="im1" width="100" height="auto" class="level-image__item d-none"/>
-					<img src="http://thuvienanhdep.net/wp-content/uploads/2016/10/hinh-anh-dep-nhat-the-gioi-ve-su-hoan-hao-khien-moi-nguoi-ngo-ngang2.jpg" id="im2" width="100" height="auto" class="level-image__item d-none"/>
-					<img src="https://i.pinimg.com/474x/df/f5/3b/dff53b68ebc10ceff41de6dd260932f6.jpg" id="im3" width="100" height="auto" class="level-image__item d-none"/>
-				</div>
-				<button id="playbutton" onclick="playButtonClicked();">Play</button>
-			</div>
-	</div>
+	</main>
 
 	<!-- <canvas id="game" height="500" width="500"></canvas> -->
 	<!-- <script src="game.js"></script> -->

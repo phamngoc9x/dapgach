@@ -1,8 +1,8 @@
 // Global Variables
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
-var screenHeight = 600;
-var screenWidth = 400;
+var screenHeight = 540;
+var screenWidth = 340;
 var shapes = {};
 var shapeIndex = 0;
 var dudeWidth = 80;
@@ -14,9 +14,27 @@ var life = 3;
 var fallSpeed = 0;
 var shapeGenerateSpeed = 1500;
 
-canvas.width = 400;
-canvas.height = 600;
+canvas.width = 340;
+canvas.height = 540;
 
+var name = "Tran Van A";
+var topScore = [
+  {
+    id: '1',
+    score: 100,
+    name: 'Nguyen Van A'
+  },
+  {
+    id: '2',
+    score: 50,
+    name: 'Nguyen Van B'
+  },
+  {
+    id: '3',
+    score: 1,
+    name: 'Nguyen Van C'
+  }
+];
 
 
 function itemNone(x) {
@@ -30,18 +48,23 @@ function drawImages(score) {
   if (score <= 5) {
     itemNone(item);
     document.querySelector("#im1").style.display = 'block';
+
   } else if (score > 5 && score <= 10) {
     itemNone(item);
     document.querySelector("#im2").style.display = 'block';
+    ballSrc = 'asset/coin.png';
+    bannerSrc = 'asset/banner1.png';
   }
   else if (score > 10){
     itemNone(item);
     document.querySelector("#im3").style.display = 'block';
+    ballSrc = 'asset/envelop.png';
+    bannerSrc = 'asset/banner2.png';
   }
+  document.querySelector('.banner').setAttribute('src',bannerSrc);
 }
 
 $(document).mousemove(function(e){
-  console.log()
   dude.Position.X = e.pageX - 100;
 })
 
@@ -81,6 +104,17 @@ function Shape(posX, width, height) {
         if(life === 0) {
           $(".life").html('Game over');
           document.getElementById("playbutton").disabled = false;
+
+          if (localStorage.getItem('topScore') == null) {
+            top = localStorage.setItem('topScore', JSON.stringify(topScore));
+            setScore =  JSON.parse(localStorage.getItem('topScore'));
+          } else {
+            setScore = JSON.parse(localStorage.getItem('topScore'));
+          }
+          setTopScore(setScore,score,name);
+
+          clearInterval();
+          window.cancelAnimationFrame();
         }
       }
     }
@@ -195,3 +229,68 @@ function playButtonClicked() {
   render();
   document.getElementById("playbutton").disabled = true;
 }
+intervalUpdate= setInterval(Updater, 10);
+intervalShape= setInterval(shapeGenerate, shapeGenerateSpeed);
+
+
+function setTopScore(setScore,score,name) {
+  var  retrievedScore = setScore;
+  var top1 = retrievedScore[0].score;
+      name1 = retrievedScore[0].name;
+  var top2 = retrievedScore[1].score,
+      name2 = retrievedScore[1].name;
+  var top3 = retrievedScore[2].score,
+      name3 = retrievedScore[2].name;
+  if (score < top3) {
+    console.log('hien diem:' + score);
+  }
+  else if (score < top2 && score >= top3) {
+    top3 = score;
+    name3 = name;
+  }
+  else if (score < top1 && score >= top2) {
+    top2 = score;
+    name2 = name;
+  }
+  else if (score >= top1) {
+    top1 = score;
+    name1 = name;
+  }
+
+  retrievedScore = [
+    {
+      id: '1',
+      score: top1,
+      name: name1
+    },
+    {
+      id: '2',
+      score: top2,
+      name: name2
+    },
+    {
+      id: '3',
+      score: top3,
+      name: name3
+    }
+  ];
+  showTopScore(retrievedScore);
+
+  localStorage.setItem('topScore', JSON.stringify(retrievedScore));
+}
+
+function showTopScore(array) {
+  document.getElementById('top1').innerHTML = '<span class="top-name">'+ array[0].name +'</span><span class="top-score"> '+ array[0].score +'</span>';
+  document.getElementById('top2').innerHTML = '<span class="top-name">'+ array[1].name +'</span><span class="top-score"> '+ array[1].score +'</span>';
+  document.getElementById('top3').innerHTML = '<span class="top-name">'+ array[2].name +'</span><span class="top-score"> '+ array[2].score +'</span>';
+}
+
+$(document).ready(function(e){
+  if (localStorage.getItem('topScore') == null) {
+    top = localStorage.setItem('topScore', JSON.stringify(topScore));
+    setScore =  JSON.parse(localStorage.getItem('topScore'));
+  } else {
+    setScore = JSON.parse(localStorage.getItem('topScore'));
+  }
+  showTopScore(setScore);
+});
