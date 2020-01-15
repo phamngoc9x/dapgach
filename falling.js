@@ -81,8 +81,6 @@ function Shape(posX, width, height) {
         if(life === 0) {
           $(".life").html('Game over');
           document.getElementById("playbutton").disabled = false;
-          clearInterval();
-          window.cancelAnimationFrame()
         }
       }
     }
@@ -152,7 +150,7 @@ function Dude(posX, width, height){
     this.checkCollisions();
     this.updatePosition();
     this.Draw();
-    requestAnimationFrame(this.update);
+    //requestAnimationFrame(this.update);
   }
 }
 
@@ -168,8 +166,10 @@ function newGame(){
 
 
 function shapeGenerate(){
-  new Shape(Math.random()*(screenWidth - 50), 40, 40);
+  if(life > 0) {
+    new Shape(Math.random()*(screenWidth - 50), 40, 40);
   setTimeout(function() { requestAnimationFrame(shapeGenerate)}, 1000);
+  }
 }
 
 function Updater() {
@@ -178,7 +178,9 @@ function Updater() {
     shapes[i].update();
   }
   dude.update();
-  requestAnimationFrame(Updater);
+  if(life > 0) {
+    requestAnimationFrame(Updater);
+  }
 }
 
 function render() {
@@ -188,6 +190,8 @@ function render() {
 }
 
 function playButtonClicked() {
+  life = 3;
+  $(".life").html(life);
   render();
   document.getElementById("playbutton").disabled = true;
 }
