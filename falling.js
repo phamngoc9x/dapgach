@@ -1,8 +1,8 @@
 // Global Variables
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
-var screenHeight = 540;
-var screenWidth = 340;
+var screenHeight = 538;
+var screenWidth = 380;
 var shapes = {};
 var shapeIndex = 0;
 var dudeWidth = 80;
@@ -14,10 +14,9 @@ var manaSrc = 'https://dotobjyajpegd.cloudfront.net/photo/5d3a66f962710e25dc99ff
 var score = 0;
 var life = 3;
 var fallSpeed = 0;
-var shapeGenerateSpeed = 1500;
 
-canvas.width = 340;
-canvas.height = 540;
+canvas.width = 380;
+canvas.height = 538;
 
 var name = "Tran Van A";
 var topScore = [
@@ -56,7 +55,7 @@ function drawImages(score) {
 }
 
 $(document).mousemove(function(e){
-  dude.Position.X = e.pageX - 100;
+  dude.Position.X = e.pageX;
 })
 
 
@@ -156,8 +155,8 @@ function Dude(posX, width, height){
     this.Position.X += this.Velocity.X;
     if(this.Position.X< 0) {
       this.Position.X = 0;
-    } else if(this.Position.X > 330) {
-      this.Position.X = 330;
+    } else if(this.Position.X > 300) {
+      this.Position.X = 300;
     }
     //this.Position.Y += this.Velocity.Y;
   }
