@@ -10,6 +10,7 @@ var dudeHeight = 80;
 var dudeSrc = 'asset/b332c923997c2a98529ff4ff6189c111.png'
 var ballSrc = 'asset/banhchung.png';
 var bannerSrc = 'asset/banner1.png';
+var manaSrc = 'https://dotobjyajpegd.cloudfront.net/photo/5d3a66f962710e25dc99ffa3';
 var score = 0;
 var life = 3;
 var fallSpeed = 0;
@@ -37,32 +38,21 @@ var topScore = [
   }
 ];
 
-
-function itemNone(x) {
-  for (var i = 0; i < x.length; i++) {
-    x[i].style.display = 'none';
-  }
-}
-
 function drawImages(score) {
   var item = document.querySelectorAll('.level-image__item');
-  if (score <= 5) {
-    itemNone(item);
-    document.querySelector("#im1").style.display = 'block';
-
-  } else if (score > 5 && score <= 10) {
-    itemNone(item);
-    document.querySelector("#im2").style.display = 'block';
+  if (score > 5 && score <= 10) {
+    manaSrc = 'http://thuvienanhdep.net/wp-content/uploads/2016/10/hinh-anh-dep-nhat-the-gioi-ve-su-hoan-hao-khien-moi-nguoi-ngo-ngang2.jpg';
     ballSrc = 'asset/coin.png';
     bannerSrc = 'asset/banner2.png';
   }
   else if (score > 10){
     itemNone(item);
-    document.querySelector("#im3").style.display = 'block';
+    manaSrc = 'https://i.pinimg.com/474x/df/f5/3b/dff53b68ebc10ceff41de6dd260932f6.jpg';
     ballSrc = 'asset/envelop.png';
     bannerSrc = 'asset/banner3.png';
   }
   document.querySelector('.banner').setAttribute('src',bannerSrc);
+  document.querySelector('.level-image__item').setAttribute('src',manaSrc);
 }
 
 $(document).mousemove(function(e){
@@ -113,9 +103,6 @@ function Shape(posX, width, height) {
             setScore = JSON.parse(localStorage.getItem('topScore'));
           }
           setTopScore(setScore,score,name);
-
-          clearInterval();
-          window.cancelAnimationFrame();
         }
       }
     }
@@ -230,8 +217,6 @@ function playButtonClicked() {
   render();
   document.getElementById("playbutton").disabled = true;
 }
-intervalUpdate= setInterval(Updater, 10);
-intervalShape= setInterval(shapeGenerate, shapeGenerateSpeed);
 
 
 function setTopScore(setScore,score,name) {
