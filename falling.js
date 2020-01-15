@@ -8,7 +8,8 @@ var shapeIndex = 0;
 var dudeWidth = 80;
 var dudeHeight = 80;
 var dudeSrc = 'asset/b332c923997c2a98529ff4ff6189c111.png'
-var ballSrc = 'asset/banhchung.png'
+var ballSrc = 'asset/banhchung.png';
+var bannerSrc = 'asset/banner1.png';
 var score = 0;
 var life = 3;
 var fallSpeed = 0;
@@ -53,13 +54,13 @@ function drawImages(score) {
     itemNone(item);
     document.querySelector("#im2").style.display = 'block';
     ballSrc = 'asset/coin.png';
-    bannerSrc = 'asset/banner1.png';
+    bannerSrc = 'asset/banner2.png';
   }
   else if (score > 10){
     itemNone(item);
     document.querySelector("#im3").style.display = 'block';
     ballSrc = 'asset/envelop.png';
-    bannerSrc = 'asset/banner2.png';
+    bannerSrc = 'asset/banner3.png';
   }
   document.querySelector('.banner').setAttribute('src',bannerSrc);
 }
