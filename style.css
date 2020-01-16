@@ -118,3 +118,10 @@ body {
     50% { transform: scale(1); }
     100% { transform: scale(1.1); }
 }
+
+.sounds audio {
+  position: absolute;
+  width: 0;
+  height: 0;
+  z-index: -999;
+}
