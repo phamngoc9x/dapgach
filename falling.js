@@ -15,6 +15,15 @@ var score = 0;
 var life = 3;
 var fallSpeed = 0;
 var speed = 1000;
+const soundTrack = document.getElementById('audio-soundtrack');
+const catchSound = document.getElementById('audio-catch');
+const catchFailSound = document.getElementById('audio-fail');
+const gameoverSound = document.getElementById('audio-gameover');
+const lvUpSound = document.getElementById('audio-lvup');
+const breakpoint = [40, 80, 120, 160, 200, 240, 280, 320];
+soundTrack.volume = .3;
+soundTrack.loop = true;
+soundTrack.playbackRate = .75;
 
 canvas.width = 380;
 canvas.height = 538;
@@ -44,30 +53,35 @@ function drawImages(score) {
     ballSrc = 'asset/coin.png';
     bannerSrc = 'asset/banner2.png';
     speed = 900;
+    soundTrack.playbackRate = .8;
   }
   else if (score > 80 && score <= 120) {
     manaSrc = 'asset/mana3.jpg';
     ballSrc = 'asset/coin.png';
     bannerSrc = 'asset/banner2.png';
     speed = 800;
+    soundTrack.playbackRate = .85;
   }
   else if (score > 120 && score <= 160) {
     manaSrc = 'asset/mana4.jpg';
     ballSrc = 'asset/coin.png';
     bannerSrc = 'asset/banner2.png';
     speed = 700;
+    soundTrack.playbackRate = .9;
   }
   else if (score > 160 && score <= 200) {
     manaSrc = 'asset/mana5.jpeg';
     ballSrc = 'asset/coin.png';
     bannerSrc = 'asset/banner2.png';
     speed = 600;
+    soundTrack.playbackRate = .95;
   }
   else if (score > 200 && score <= 240) {
     manaSrc = 'asset/mana6.jpg';
     ballSrc = 'asset/coin.png';
     bannerSrc = 'asset/banner2.png';
     speed = 500;
+    soundTrack.playbackRate = 1;
   }
   else if (score > 240){
     manaSrc = 'asset/mana7.jpeg';
@@ -113,10 +127,14 @@ function Shape(posX, width, height) {
 
     this.checkCollisions = function() {
       if(this.Position.Y >= screenHeight){
+        catchFailSound.play();
         delete shapes[this.Index];
         life --;
         $(".life").html(life);
         if(life === 0) {
+          soundTrack.pause();
+          soundTrack.currentTime = 0;
+          soundTrack.playbackRate = .7;
           $(".life").html('Game over');
           document.getElementById("playbutton").disabled = false;
 
@@ -164,6 +182,7 @@ function Dude(posX, width, height){
         a.Position.X + a.Width >= b.Position.X &&
         a.Position.Y + a.Height >= b.Position.Y &&
         a.Position.Y <= b.Position.Y + b.Height ){
+          catchSound.play();
           return true
       }
     }
@@ -171,6 +190,12 @@ function Dude(posX, width, height){
       if(collision(this, shapes[i])){
         delete shapes[i];
         score++;
+        breakpoint.forEach(elm => {
+          if (score === elm) {
+            lvUpSound.play();
+            return
+          }
+        });
         $(".score").html(score);
         drawImages(score);
       }
@@ -236,6 +261,7 @@ function render() {
 }
 
 function playButtonClicked() {
+  soundTrack.play();
   life = 3;
   $(".life").html(life);
   render();
