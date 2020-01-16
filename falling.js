@@ -5,10 +5,9 @@ var screenHeight = 538;
 var screenWidth = 380;
 var shapes = {};
 var shapeIndex = 0;
-var dudeWidth = 80;
-var dudeHeight = 80;
+var dudeWidth = 70;
+var dudeHeight = 35;
 var dudeSrc = 'asset/b332c923997c2a98529ff4ff6189c111.png'
-var ballSrc = 'asset/banhchung.png';
 var bannerSrc = 'asset/banner1.png';
 var manaSrc = 'asset/mana1.jpg';
 var score = 0;
@@ -50,80 +49,75 @@ var topScore = [
 function drawImages(score) {
   if (score > 40 && score <= 80) {
     manaSrc = 'asset/mana2.jpg';
-    ballSrc = 'asset/coin.png';
     bannerSrc = 'asset/banner2.png';
     speed = 900;
     soundTrack.playbackRate = .8;
   }
   else if (score > 80 && score <= 120) {
     manaSrc = 'asset/mana3.jpg';
-    ballSrc = 'asset/coin.png';
     bannerSrc = 'asset/banner2.png';
     speed = 800;
     soundTrack.playbackRate = .85;
   }
   else if (score > 120 && score <= 160) {
     manaSrc = 'asset/mana4.jpg';
-    ballSrc = 'asset/coin.png';
     bannerSrc = 'asset/banner2.png';
     speed = 700;
     soundTrack.playbackRate = .9;
   }
   else if (score > 160 && score <= 200) {
     manaSrc = 'asset/mana5.jpeg';
-    ballSrc = 'asset/coin.png';
     bannerSrc = 'asset/banner2.png';
     speed = 600;
     soundTrack.playbackRate = .95;
   }
   else if (score > 200 && score <= 240) {
     manaSrc = 'asset/mana6.jpg';
-    ballSrc = 'asset/coin.png';
     bannerSrc = 'asset/banner2.png';
     speed = 500;
     soundTrack.playbackRate = 1;
   }
-  else if (score > 240){
+  else if (score > 240) {
     manaSrc = 'asset/mana7.jpeg';
-    ballSrc = 'asset/envelop.png';
     bannerSrc = 'asset/banner3.png';
     speed = 300;
   }
-  document.querySelector('.banner').setAttribute('src',bannerSrc);
-  document.querySelector('.level-image__item').setAttribute('src',manaSrc);
+  document.querySelector('.banner').setAttribute('src', bannerSrc);
+  document.querySelector('.level-image__item').setAttribute('src', manaSrc);
 }
 
-$(document).mousemove(function(e){
+$(document).mousemove(function (e) {
   dude.Position.X = e.pageX;
 })
 
 
-$(document).keydown(function(e){
-    if (e.which == 37){
-      dude.Velocity.X = -10;
-    } else if (e.which == 39){
-      dude.Velocity.X = 10;
-    }
+$(document).keydown(function (e) {
+  if (e.which == 37) {
+    dude.Velocity.X = -10;
+  } else if (e.which == 39) {
+    dude.Velocity.X = 10;
+  }
 });
-$(document).keyup(function(){
+$(document).keyup(function () {
   dude.Velocity.X = 0;
   dude.Velocity.Y = 0;
 })
 
 //Generates Snake Head
 function Shape(posX, width, height) {
-    this.Width = width;
-    this.Height = height;
-    this.Color = "red"
-    this.Position = {
-        X: posX,
-        Y: -this.Height
-    };
-    this.Velocity = Math.random() * fallSpeed + 5;
-    this.Index = shapeIndex;
+  this.Width = width;
+  this.Height = height;
+  this.Color = "red"
+  this.Position = {
+    X: posX,
+    Y: -this.Height
+  };
+  this.Velocity = Math.random() * fallSpeed + 5;
+  this.Index = shapeIndex;
+  this.randomItemNumber = Math.floor((Math.random() * 3) + 1);
 
-    shapes[shapeIndex] = this;
-    shapeIndex++;
+  shapes[shapeIndex] = this;
+  shapeIndex++;
 
     this.checkCollisions = function() {
       if(this.Position.Y >= screenHeight){
@@ -138,45 +132,45 @@ function Shape(posX, width, height) {
           $(".life").html('Game over');
           document.getElementById("playbutton").disabled = false;
 
-          if (localStorage.getItem('topScore') == null) {
-            top = localStorage.setItem('topScore', JSON.stringify(topScore));
-            setScore =  JSON.parse(localStorage.getItem('topScore'));
-          } else {
-            setScore = JSON.parse(localStorage.getItem('topScore'));
-          }
-          setTopScore(setScore,score,name);
+        if (localStorage.getItem('topScore') == null) {
+          top = localStorage.setItem('topScore', JSON.stringify(topScore));
+          setScore = JSON.parse(localStorage.getItem('topScore'));
+        } else {
+          setScore = JSON.parse(localStorage.getItem('topScore'));
         }
+        setTopScore(setScore, score, name);
       }
     }
+  }
 
-    this.updatePosition = function() {
-      this.Position.Y += this.Velocity;
-    }
+  this.updatePosition = function () {
+    this.Position.Y += this.Velocity;
+  }
 
-    this.Draw = function() {
-        ctx.beginPath();
-        var banhchungIcon = new Image()
-        banhchungIcon.src = ballSrc
-        ctx.drawImage(banhchungIcon, this.Position.X, this.Position.Y, this.Width, this.Height);
-        ctx.fill();
-    }
+  this.Draw = function () {
+    ctx.beginPath();
+    var banhchungIcon = new Image()
+    banhchungIcon.src = `asset/banhchung-` + this.randomItemNumber + `.png`
+    ctx.drawImage(banhchungIcon, this.Position.X, this.Position.Y, this.Width, this.Height);
+    ctx.fill();
+  }
 
-    this.update = function(){
-        this.checkCollisions();
-        this.updatePosition();
-        this.Draw();
-    }
+  this.update = function () {
+    this.checkCollisions();
+    this.updatePosition();
+    this.Draw();
+  }
 }
 
-function Dude(posX, width, height){
+function Dude(posX, width, height) {
   this.Width = width;
   this.Height = height;
   this.Color = "green"
-  this.Position = {X: posX, Y: screenHeight-this.Height}
-  this.Velocity = {X: 0, Y: 0,}
+  this.Position = { X: posX, Y: screenHeight - this.Height - 20 }
+  this.Velocity = { X: 0, Y: 0, }
 
-  this.checkCollisions = function(){
-    function collision(a,b){
+  this.checkCollisions = function () {
+    function collision(a, b) {
       if (
         a.Position.X <= b.Position.X + b.Width &&
         a.Position.X + a.Width >= b.Position.X &&
@@ -186,8 +180,8 @@ function Dude(posX, width, height){
           return true
       }
     }
-    for (i in shapes){
-      if(collision(this, shapes[i])){
+    for (i in shapes) {
+      if (collision(this, shapes[i])) {
         delete shapes[i];
         score++;
         breakpoint.forEach(elm => {
@@ -201,23 +195,23 @@ function Dude(posX, width, height){
       }
     }
   }
-  this.updatePosition = function(){
+  this.updatePosition = function () {
     this.Position.X += this.Velocity.X;
-    if(this.Position.X< 0) {
+    if (this.Position.X < 0) {
       this.Position.X = 0;
-    } else if(this.Position.X > 300) {
+    } else if (this.Position.X > 300) {
       this.Position.X = 300;
     }
     //this.Position.Y += this.Velocity.Y;
   }
-  this.Draw = function(){
+  this.Draw = function () {
     ctx.beginPath();
     var dudeIcon = new Image()
     dudeIcon.src = dudeSrc
     ctx.drawImage(dudeIcon, this.Position.X, this.Position.Y, this.Width, this.Height);
     ctx.fill();
   }
-  this.update = function(){
+  this.update = function () {
     this.checkCollisions();
     this.updatePosition();
     this.Draw();
@@ -226,30 +220,30 @@ function Dude(posX, width, height){
 }
 
 
-var dude = new Dude((screenWidth - dudeWidth)/2 , dudeWidth, dudeHeight);
+var dude = new Dude((screenWidth - dudeWidth) / 2, dudeWidth, dudeHeight);
 
-function newGame(){
-  dude = new Dude((screenWidth - dudeWidth)/2, dudeWidth, dudeHeight);
+function newGame() {
+  dude = new Dude((screenWidth - dudeWidth) / 2, dudeWidth, dudeHeight);
   shapes = {};
   score = 0;
   life = 3;
 }
 
 
-function shapeGenerate(){
-  if(life > 0) {
-    new Shape(Math.random()*(screenWidth - 50), 40, 40);
-  setTimeout(function() { requestAnimationFrame(shapeGenerate)}, speed);
+function shapeGenerate() {
+  if (life > 0) {
+    new Shape(Math.random() * (screenWidth - 50), 40, 40);
+    setTimeout(function () { requestAnimationFrame(shapeGenerate) }, speed);
   }
 }
 
 function Updater() {
   ctx.clearRect(0, 0, screenWidth, screenHeight);
-  for(i in shapes){
+  for (i in shapes) {
     shapes[i].update();
   }
   dude.update();
-  if(life > 0) {
+  if (life > 0) {
     requestAnimationFrame(Updater);
   }
 }
@@ -269,14 +263,14 @@ function playButtonClicked() {
 }
 
 
-function setTopScore(setScore,score,name) {
-  var  retrievedScore = setScore;
+function setTopScore(setScore, score, name) {
+  var retrievedScore = setScore;
   var top1 = retrievedScore[0].score;
-      name1 = retrievedScore[0].name;
+  name1 = retrievedScore[0].name;
   var top2 = retrievedScore[1].score,
-      name2 = retrievedScore[1].name;
+    name2 = retrievedScore[1].name;
   var top3 = retrievedScore[2].score,
-      name3 = retrievedScore[2].name;
+    name3 = retrievedScore[2].name;
   if (score < top3) {
     console.log('hien diem:' + score);
   }
@@ -316,15 +310,15 @@ function setTopScore(setScore,score,name) {
 }
 
 function showTopScore(array) {
-  document.getElementById('top1').innerHTML = '<span class="top-name">'+ array[0].name +'</span><span class="top-score"> '+ array[0].score +'</span>';
-  document.getElementById('top2').innerHTML = '<span class="top-name">'+ array[1].name +'</span><span class="top-score"> '+ array[1].score +'</span>';
-  document.getElementById('top3').innerHTML = '<span class="top-name">'+ array[2].name +'</span><span class="top-score"> '+ array[2].score +'</span>';
+  document.getElementById('top1').innerHTML = '<span class="top-name">' + array[0].name + '</span><span class="top-score"> ' + array[0].score + '</span>';
+  document.getElementById('top2').innerHTML = '<span class="top-name">' + array[1].name + '</span><span class="top-score"> ' + array[1].score + '</span>';
+  document.getElementById('top3').innerHTML = '<span class="top-name">' + array[2].name + '</span><span class="top-score"> ' + array[2].score + '</span>';
 }
 
-$(document).ready(function(e){
+$(document).ready(function (e) {
   if (localStorage.getItem('topScore') == null) {
     top = localStorage.setItem('topScore', JSON.stringify(topScore));
-    setScore =  JSON.parse(localStorage.getItem('topScore'));
+    setScore = JSON.parse(localStorage.getItem('topScore'));
   } else {
     setScore = JSON.parse(localStorage.getItem('topScore'));
   }
