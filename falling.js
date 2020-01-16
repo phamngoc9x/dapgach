@@ -10,10 +10,11 @@ var dudeHeight = 80;
 var dudeSrc = 'asset/b332c923997c2a98529ff4ff6189c111.png'
 var ballSrc = 'asset/banhchung.png';
 var bannerSrc = 'asset/banner1.png';
-var manaSrc = 'https://dotobjyajpegd.cloudfront.net/photo/5d3a66f962710e25dc99ffa3';
+var manaSrc = 'asset/mana1.jpg';
 var score = 0;
 var life = 3;
 var fallSpeed = 0;
+var speed = 1000;
 
 canvas.width = 380;
 canvas.height = 538;
@@ -38,17 +39,41 @@ var topScore = [
 ];
 
 function drawImages(score) {
-  var item = document.querySelectorAll('.level-image__item');
-  if (score > 5 && score <= 10) {
-    manaSrc = 'http://thuvienanhdep.net/wp-content/uploads/2016/10/hinh-anh-dep-nhat-the-gioi-ve-su-hoan-hao-khien-moi-nguoi-ngo-ngang2.jpg';
+  if (score > 40 && score <= 80) {
+    manaSrc = 'asset/mana2.jpg';
     ballSrc = 'asset/coin.png';
     bannerSrc = 'asset/banner2.png';
+    speed = 900;
   }
-  else if (score > 10){
-    itemNone(item);
-    manaSrc = 'https://i.pinimg.com/474x/df/f5/3b/dff53b68ebc10ceff41de6dd260932f6.jpg';
+  else if (score > 80 && score <= 120) {
+    manaSrc = 'asset/mana3.jpg';
+    ballSrc = 'asset/coin.png';
+    bannerSrc = 'asset/banner2.png';
+    speed = 800;
+  }
+  else if (score > 120 && score <= 160) {
+    manaSrc = 'asset/mana4.jpg';
+    ballSrc = 'asset/coin.png';
+    bannerSrc = 'asset/banner2.png';
+    speed = 700;
+  }
+  else if (score > 160 && score <= 200) {
+    manaSrc = 'asset/mana5.jpeg';
+    ballSrc = 'asset/coin.png';
+    bannerSrc = 'asset/banner2.png';
+    speed = 600;
+  }
+  else if (score > 200 && score <= 240) {
+    manaSrc = 'asset/mana6.jpg';
+    ballSrc = 'asset/coin.png';
+    bannerSrc = 'asset/banner2.png';
+    speed = 500;
+  }
+  else if (score > 240){
+    manaSrc = 'asset/mana7.jpeg';
     ballSrc = 'asset/envelop.png';
     bannerSrc = 'asset/banner3.png';
+    speed = 300;
   }
   document.querySelector('.banner').setAttribute('src',bannerSrc);
   document.querySelector('.level-image__item').setAttribute('src',manaSrc);
@@ -189,7 +214,7 @@ function newGame(){
 function shapeGenerate(){
   if(life > 0) {
     new Shape(Math.random()*(screenWidth - 50), 40, 40);
-  setTimeout(function() { requestAnimationFrame(shapeGenerate)}, 1000);
+  setTimeout(function() { requestAnimationFrame(shapeGenerate)}, speed);
   }
 }
 
