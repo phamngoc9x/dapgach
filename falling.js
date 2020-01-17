@@ -17,12 +17,12 @@ var speed = 1000;
 const soundTrack = document.getElementById('audio-soundtrack');
 const catchSound = document.getElementById('audio-catch');
 const catchFailSound = document.getElementById('audio-fail');
-const gameoverSound = document.getElementById('audio-gameover');
 const lvUpSound = document.getElementById('audio-lvup');
 const breakpoint = [30, 60, 90, 120, 150, 180, 210, 240, 270];
 soundTrack.volume = .3;
 soundTrack.loop = true;
 soundTrack.playbackRate = .75;
+catchFailSound.volume = .7;
 
 canvas.width = 380;
 canvas.height = 538;
@@ -135,6 +135,7 @@ function Shape(posX, width, height) {
           soundTrack.currentTime = 0;
           soundTrack.playbackRate = .7;
           $(".life").html('Game over');
+          $('.result-board').addClass('show');
           document.getElementById("playbutton").disabled = false;
 
         if (localStorage.getItem('topScore') == null) {
@@ -259,13 +260,22 @@ function render() {
   Updater()
 }
 
-function playButtonClicked() {
-  soundTrack.play();
-  life = 3;
-  $(".life").html(life);
-  render();
-  document.getElementById("playbutton").disabled = true;
-}
+$('#playbutton').on('click', function (e) {
+  e.preventDefault();
+  const fieldName = $('.form-regis input');
+  if (fieldName.val().trim() !== '') {
+    $('.info-user').addClass('d-block');
+    $('.info-user .name').text(fieldName.val().trim())
+    $('.form-regis').addClass('d-none');
+    soundTrack.play();
+    life = 3;
+    $(".life").html(life);
+    render();
+    document.getElementById("playbutton").disabled = true;
+  } else {
+    $('.form-regis .mess-error').addClass('d-block');
+  }
+});
 
 
 function setTopScore(setScore, score, name) {

@@ -1,44 +1,54 @@
+* {
+  box-sizing: border-box;
+}
+
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 @media (max-width: 990px) {
-    .container {
-        max-width: 100%;
-        margin: 0 30px;
-    }
+  .container {
+    max-width: 100%;
+    margin: 0 30px;
+  }
 }
 
 canvas {
-    border: 1px solid #000;
-    position: relative;
-    z-index: 2;
-    /* top: calc((100vh - 600px)/2 + 25px);
-    left: 25px;
-    z-index: 2; */
+  position: relative;
+  z-index: 2;
+  /* top: calc((100vh - 600px)/2 + 25px);
+  left: 25px;
+  z-index: 2; */
 }
 body {
-    overflow: hidden;
-    height: 100vh;
-    margin: 0;
-    width: 100vw;
-    background: url('asset/Artboard 1.png') no-repeat;
-    background-size: cover;
+  overflow: hidden;
+  height: 100vh;
+  margin: 0;
+  width: 100vw;
+  background: url('asset/Artboard 1.png') no-repeat;
+  background-size: cover;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 400;
 }
 .mockup-phone {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    max-height: 600px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  max-height: 600px;
 }
 .d-none {
-    display: none;
+  display: none;
 }
+
+.d-block {
+  display: block !important;
+}
+
 .main-content {
   width: 800px;
   padding: 50px;
@@ -49,6 +59,10 @@ body {
   background-color: #75c16a;
 }
 .game-zone {
+  width: 382px;
+  height: 540px;
+  border: 1px solid black;
+  max-width: 100%;
   z-index: 1;
   position: relative;
 }
@@ -100,23 +114,23 @@ body {
   z-index: 1;
 }
 .col-right {
-    padding: 0 15px;
-    flex: 0 0 200px;
-    z-index: 2;
+  padding: 0 15px;
+  flex: 0 0 200px;
+  z-index: 2;
 }
 .level-image__item {
-    transition: all 0.5s;
-    animation: scale 2s infinite;
+  transition: all 0.5s;
+  animation: scale 2s infinite;
 }
 .banner {
-    max-width: 100%;
-    display: block;
-    max-height: 100px;
+  max-width: 100%;
+  display: block;
+  max-height: 100px;
 }
 @keyframes scale {
-    0%   { transform: scale(1.1); }
-    50% { transform: scale(1); }
-    100% { transform: scale(1.1); }
+  0%   { transform: scale(1.1); }
+  50% { transform: scale(1); }
+  100% { transform: scale(1.1); }
 }
 
 .sounds audio {
@@ -124,4 +138,106 @@ body {
   width: 0;
   height: 0;
   z-index: -999;
+}
+
+.form-regis {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 24px;
+  z-index: 9;
+  background-color: white;
+  border: 1px solid #dedede;
+  border-radius: 2px;
+  width: 240px;
+}
+
+.form-regis label {
+  font-size: 18px;
+  margin-bottom: 20px;
+  display: block;
+  text-align: center;
+}
+
+.form-regis input {
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  height: 38px;
+  padding: 0 10px;
+  font-size: 14px;
+  width: 100%;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.form-regis input:focus {
+  border-color: #80bdff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, .25);
+}
+
+.form-regis .btn-start {
+  width: 160px;
+  max-width: 100%;
+  margin: 18px auto 0;
+  text-align: center;
+  background-color: #dc3545;
+  border-radius: 3px;
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  display: block;
+  font-size: 14px;
+  border: 0;
+}
+
+.form-regis .btn-start:hover {
+  background-color: #e00d21;
+}
+
+.form-regis .mess-error {
+  color: red;
+  text-align: center;
+  font-size: 13px;
+}
+
+.info-user {
+  display: none;
+  margin-bottom: 30px;
+}
+
+h1, h2, h3, h4 {
+  margin-top: 0;
+}
+
+.result-board {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+  width: 240px;
+  display: none;
+  opacity: 0;
+}
+
+.result-board img {
+  width: 100%;
+}
+
+.result-board.show {
+  display: block;
+  animation: fade 2s forwards;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
