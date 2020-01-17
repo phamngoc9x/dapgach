@@ -7,19 +7,19 @@ var shapes = {};
 var shapeIndex = 0;
 var dudeWidth = 70;
 var dudeHeight = 35;
-var dudeSrc = 'asset/b332c923997c2a98529ff4ff6189c111.png'
+var dudeSrc = 'asset/bag.png'
 var bannerSrc = 'asset/banner1.png';
 var manaSrc = 'asset/mana1.jpg';
 var score = 0;
 var life = 3;
-var fallSpeed = 0;
+var fallSpeed = 5;
 var speed = 1000;
 const soundTrack = document.getElementById('audio-soundtrack');
 const catchSound = document.getElementById('audio-catch');
 const catchFailSound = document.getElementById('audio-fail');
 const gameoverSound = document.getElementById('audio-gameover');
 const lvUpSound = document.getElementById('audio-lvup');
-const breakpoint = [40, 80, 120, 160, 200, 240, 280, 320];
+const breakpoint = [30, 60, 90, 120, 150, 180, 210, 240, 270];
 soundTrack.volume = .3;
 soundTrack.loop = true;
 soundTrack.playbackRate = .75;
@@ -47,48 +47,53 @@ var topScore = [
 ];
 
 function drawImages(score) {
-  if (score > 40 && score <= 80) {
+  if (score > 30 && score <= 60) {
     manaSrc = 'asset/mana2.jpg';
     bannerSrc = 'asset/banner2.png';
-    speed = 900;
+    speed = 700;
+    fallSpeed = 10;
     soundTrack.playbackRate = .8;
   }
-  else if (score > 80 && score <= 120) {
+  else if (score > 60 && score <= 90) {
     manaSrc = 'asset/mana3.jpg';
     bannerSrc = 'asset/banner2.png';
-    speed = 800;
+    speed = 500;
+    fallSpeed = 15;
     soundTrack.playbackRate = .85;
   }
-  else if (score > 120 && score <= 160) {
+  else if (score > 90 && score <= 1200) {
     manaSrc = 'asset/mana4.jpg';
     bannerSrc = 'asset/banner2.png';
-    speed = 700;
+    speed = 400;
     soundTrack.playbackRate = .9;
+    fallSpeed = 20;
   }
-  else if (score > 160 && score <= 200) {
+  else if (score > 120 && score <= 150) {
     manaSrc = 'asset/mana5.jpeg';
     bannerSrc = 'asset/banner2.png';
-    speed = 600;
+    speed = 300;
     soundTrack.playbackRate = .95;
+    fallSpeed = 25;
   }
-  else if (score > 200 && score <= 240) {
+  else if (score > 150 && score <= 180) {
     manaSrc = 'asset/mana6.jpg';
     bannerSrc = 'asset/banner2.png';
-    speed = 500;
+    speed = 200;
     soundTrack.playbackRate = 1;
+    fallSpeed = 30;
   }
-  else if (score > 240) {
+  else if (score > 180) {
     manaSrc = 'asset/mana7.jpeg';
     bannerSrc = 'asset/banner3.png';
-    speed = 300;
+    speed = 100;
   }
   document.querySelector('.banner').setAttribute('src', bannerSrc);
   document.querySelector('.level-image__item').setAttribute('src', manaSrc);
 }
 
-$(document).mousemove(function (e) {
-  dude.Position.X = e.pageX;
-})
+// $(document).mousemove(function (e) {
+//   dude.Position.X = e.pageX;
+// })
 
 
 $(document).keydown(function (e) {
@@ -144,7 +149,7 @@ function Shape(posX, width, height) {
   }
 
   this.updatePosition = function () {
-    this.Position.Y += this.Velocity;
+    this.Position.Y += fallSpeed;
   }
 
   this.Draw = function () {
