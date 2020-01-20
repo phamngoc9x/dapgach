@@ -124,19 +124,19 @@ function Shape(posX, width, height) {
   shapes[shapeIndex] = this;
   shapeIndex++;
 
-    this.checkCollisions = function() {
-      if(this.Position.Y >= screenHeight){
-        catchFailSound.play();
-        delete shapes[this.Index];
-        life --;
-        $(".life").html(life);
-        if(life === 0) {
-          soundTrack.pause();
-          soundTrack.currentTime = 0;
-          soundTrack.playbackRate = .7;
-          $(".life").html('Game over');
-          $('.result-board').addClass('show');
-          document.getElementById("playbutton").disabled = false;
+  this.checkCollisions = function () {
+    if (this.Position.Y >= screenHeight) {
+      catchFailSound.play();
+      delete shapes[this.Index];
+      life--;
+      $(".life").html(life);
+      if (life === 0) {
+        soundTrack.pause();
+        soundTrack.currentTime = 0;
+        soundTrack.playbackRate = .7;
+        $(".life").html('Game over');
+        $('.result-board').addClass('show');
+        document.getElementById("playbutton").disabled = false;
 
         if (localStorage.getItem('topScore') == null) {
           top = localStorage.setItem('topScore', JSON.stringify(topScore));
@@ -144,7 +144,8 @@ function Shape(posX, width, height) {
         } else {
           setScore = JSON.parse(localStorage.getItem('topScore'));
         }
-        setTopScore(setScore, score, name);
+        addRecord({ name: document.querySelector('.form-regis input').value, score })
+        // setTopScore(setScore, score, name);
       }
     }
   }
@@ -181,9 +182,9 @@ function Dude(posX, width, height) {
         a.Position.X <= b.Position.X + b.Width &&
         a.Position.X + a.Width >= b.Position.X &&
         a.Position.Y + a.Height >= b.Position.Y &&
-        a.Position.Y <= b.Position.Y + b.Height ){
-          catchSound.play();
-          return true
+        a.Position.Y <= b.Position.Y + b.Height) {
+        catchSound.play();
+        return true
       }
     }
     for (i in shapes) {
@@ -331,11 +332,15 @@ function showTopScore(array) {
 }
 
 $(document).ready(function (e) {
-  if (localStorage.getItem('topScore') == null) {
-    top = localStorage.setItem('topScore', JSON.stringify(topScore));
-    setScore = JSON.parse(localStorage.getItem('topScore'));
-  } else {
-    setScore = JSON.parse(localStorage.getItem('topScore'));
-  }
-  showTopScore(setScore);
+  // if (localStorage.getItem('topScore') == null) {
+  //   top = localStorage.setItem('topScore', JSON.stringify(topScore));
+  //   setScore = JSON.parse(localStorage.getItem('topScore'));
+  // } else {
+  //   setScore = JSON.parse(localStorage.getItem('topScore'));
+  // }
+
+  subscribeScores(scores => {
+    showTopScore(scores)
+  })
+
 });
