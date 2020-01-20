@@ -219,9 +219,11 @@ h1, h2, h3, h4 {
   width: 240px;
   display: none;
   opacity: 0;
+  background-color: #333;
+  text-align: center;
 }
 
-.result-board img {
+.result-board > img {
   width: 100%;
 }
 
@@ -239,5 +241,39 @@ h1, h2, h3, h4 {
   }
   100% {
     opacity: 1;
+  }
+}
+
+.btn-replay {
+  display: flex;
+  width: 160px;
+  max-width: 100%;
+  margin: 12px auto 24px;
+  border-radius: 3px;
+  padding: 10px;
+  font-size: 14px;
+  border: 0;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-replay img {
+  height: 16px;
+  width: 16px;
+  margin-right: 12px;
+}
+
+.btn-replay:hover img {
+  animation: rotate 1s forwards;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(-360deg);
   }
 }

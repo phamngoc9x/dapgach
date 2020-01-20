@@ -144,7 +144,7 @@ function Shape(posX, width, height) {
         } else {
           setScore = JSON.parse(localStorage.getItem('topScore'));
         }
-        addRecord({ name: document.querySelector('.form-regis input').value, score })
+        addRecord({ name: document.querySelector('.form-regis input').value, score });
         // setTopScore(setScore, score, name);
       }
     }
@@ -266,18 +266,36 @@ $('#playbutton').on('click', function (e) {
   const fieldName = $('.form-regis input');
   if (fieldName.val().trim() !== '') {
     $('.info-user').addClass('d-block');
-    $('.info-user .name').text(fieldName.val().trim())
+    $('.info-user .name').text(fieldName.val().trim());
     $('.form-regis').addClass('d-none');
     soundTrack.play();
     life = 3;
     $(".life").html(life);
     render();
-    document.getElementById("playbutton").disabled = true;
   } else {
     $('.form-regis .mess-error').addClass('d-block');
   }
 });
 
+function replay() {
+  $('.result-board').removeClass('show');
+  setTimeout(function () {
+    soundTrack.play();
+    life = 3;
+    $(".life").html(life);
+    render();
+  }, 1000)
+}
+
+$('#replay-button').on('click', function () {
+  replay()
+});
+
+window.onkeypress = function(e) {
+  if (e.keyCode == 13 && document.querySelector('.result-board.show #replay-button')) {
+    replay()
+  }
+};
 
 function setTopScore(setScore, score, name) {
   var retrievedScore = setScore;
