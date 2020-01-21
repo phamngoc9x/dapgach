@@ -177,7 +177,11 @@ body {
 .info-user {
   display: none;
   margin-bottom: 10px;
+<<<<<<< HEAD
   border-top: 5px solid #edb543;
+=======
+  border: 5px solid #edb543;
+>>>>>>> 0f7d4e4bac1d71ec2a6530085304b33ff4b9a635
   border-radius: 4px;
   padding: 10px;
   text-align: center;
@@ -185,7 +189,11 @@ body {
 }
 
 .top-list {
+<<<<<<< HEAD
   border-top: 5px solid #edb543;
+=======
+  border: 5px solid #edb543;
+>>>>>>> 0f7d4e4bac1d71ec2a6530085304b33ff4b9a635
   border-radius: 4px;
   padding: 10px;
   background-color: rgba(255, 255, 255, .5);
