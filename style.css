@@ -86,9 +86,24 @@ body {
   top: 0;
   z-index: 0;
 }
+
 .core-value {
-  height: 150px;
+  display: flex;
+  height: 130px;
+  margin-bottom: 20px;
+  background-image: url(asset/banner1.png);
+  background-position: center;
+  background-size: cover;
+  align-items: center;
+  justify-content: center;
 }
+
+.slogan {
+  font-size: 24px;
+  margin: 0;
+  color: white;
+}
+
 .col-left:after {
   content: '';
   width: 100%;
