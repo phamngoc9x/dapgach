@@ -32,7 +32,6 @@ function subscribeScores(callback) {
 }
 
 function addRecord({ name, score }) {
-  console.log('SET SCORE: ', name, score)
   userCollection
     .add({
       name,
