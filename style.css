@@ -29,17 +29,10 @@ body {
   height: 100vh;
   margin: 0;
   width: 100vw;
-  background: url('asset/Artboard 1.png') no-repeat;
+  background: url('asset/bg.jpg') no-repeat;
   background-size: cover;
   font-family: 'Noto Sans', sans-serif;
   font-weight: 400;
-}
-.mockup-phone {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  max-height: 600px;
 }
 .d-none {
   display: none;
@@ -51,47 +44,26 @@ body {
 
 .main-content {
   width: 800px;
-  padding: 50px;
-  border-radius: 100px;
+  height: 600px;
   position: relative;
-  background-size: contain;
+  background-size: cover;
   display: flex;
-  background-color: #75c16a;
+  background-image: url(./asset/frame.jpg);
 }
 .game-zone {
-  width: 382px;
-  height: 540px;
-  border: 1px solid black;
+  border: 5px solid #edb543;
+  border-radius: 4px;
   max-width: 100%;
   z-index: 1;
   position: relative;
 }
-.main-content:before {
-  content: '';
-  height: 100%;
-  width: 40px;
-  background-color: #fee64f;
-  position: absolute;
-  left: 30%;
-  top: 0;
-  z-index: 0;
-}
-.main-content:after {
-  content: '';
-  height: 100%;
-  width: 40px;
-  background-color: #fee64f;
-  position: absolute;
-  left: 512px;
-  top: 0;
-  z-index: 0;
-}
 
 .core-value {
   display: flex;
-  height: 130px;
-  margin-bottom: 20px;
+  height: 80px;
+  margin-bottom: 10px;
   background-image: url(asset/banner1.png);
+  background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   align-items: center;
@@ -104,33 +76,14 @@ body {
   color: white;
 }
 
-.col-left:after {
-  content: '';
-  width: 100%;
-  height: 40px;
-  background-color: #fee64f;
-  position: absolute;
-  bottom: 230px;
-  left: 0;
-  z-index: 0;
-}
-.col-left:before {
-  content: '';
-  width: 100%;
-  height: 40px;
-  background-color: #fee64f;
-  position: absolute;
-  top: 230px;
-  left: 0;
-  z-index: 0;
-}
 .col-left {
   flex: 0 0 500px;
   z-index: 1;
+  padding: 10px;
 }
 .col-right {
-  padding: 0 15px;
-  flex: 0 0 200px;
+  padding: 10px;
+  flex: 0 0 270px;
   z-index: 2;
 }
 .level-image__item {
