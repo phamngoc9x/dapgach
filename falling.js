@@ -18,7 +18,7 @@ const soundTrack = document.getElementById('audio-soundtrack');
 const catchSound = document.getElementById('audio-catch');
 const catchFailSound = document.getElementById('audio-fail');
 const lvUpSound = document.getElementById('audio-lvup');
-const breakpoint = [30, 60, 90, 120, 150, 180, 210, 240, 270];
+const breakpoint = [30, 60, 90, 120, 150, 180];
 soundTrack.volume = .3;
 soundTrack.loop = true;
 soundTrack.playbackRate = .75;
@@ -47,42 +47,42 @@ var topScore = [
 ];
 
 function drawImages(score) {
-  if (score > 30 && score <= 60) {
+  if (score >= 30 && score < 60) {
     manaSrc = 'asset/mana2.png';
     coreValue = 'Thing outside the box';
     speed = 700;
     fallSpeed = 7;
     soundTrack.playbackRate = .8;
   }
-  else if (score > 60 && score <= 90) {
+  else if (score >= 60 && score < 90) {
     manaSrc = 'asset/mana3.png';
     coreValue = 'Get risky';
     speed = 500;
     fallSpeed = 10;
     soundTrack.playbackRate = .85;
   }
-  else if (score > 90 && score <= 1200) {
+  else if (score >= 90 && score < 120) {
     manaSrc = 'asset/mana4.png';
     coreValue = 'Be optimistic';
     speed = 400;
     soundTrack.playbackRate = .9;
     fallSpeed = 12;
   }
-  else if (score > 120 && score <= 150) {
+  else if (score >= 120 && score < 150) {
     manaSrc = 'asset/mana5.png';
     coreValue = 'Go fast';
     speed = 300;
     soundTrack.playbackRate = .95;
     fallSpeed = 15;
   }
-  else if (score > 150 && score <= 180) {
+  else if (score >= 150 && score < 180) {
     manaSrc = 'asset/mana6.png';
     coreValue = 'Be professional';
     speed = 200;
     soundTrack.playbackRate = 1;
     fallSpeed = 18;
   }
-  else if (score > 180) {
+  else if (score >= 180) {
     manaSrc = 'asset/mana7.png';
     coreValue = 'Stay focus';
     fallSpeed = 20;
@@ -135,7 +135,6 @@ function Shape(posX, width, height) {
       if (life === 0) {
         soundTrack.pause();
         soundTrack.currentTime = 0;
-        soundTrack.playbackRate = .7;
         $(".life").html('Game over');
         $('.result-board').addClass('show');
         document.getElementById("playbutton").disabled = false;
@@ -281,6 +280,9 @@ $('#playbutton').on('click', function (e) {
 
 function replay() {
   $('.result-board').removeClass('show');
+  fallSpeed = 5;
+  speed = 1000;
+  soundTrack.playbackRate = .75;
   setTimeout(function () {
     soundTrack.play();
     life = 3;
@@ -294,7 +296,7 @@ $('#replay-button').on('click', function () {
 });
 
 window.onkeypress = function(e) {
-  if (e.keyCode == 13 && document.querySelector('.result-board.show #replay-button')) {
+  if (e.keyCode === 13 && document.querySelector('.result-board.show #replay-button')) {
     replay()
   }
 };
@@ -346,9 +348,12 @@ function setTopScore(setScore, score, name) {
 }
 
 function showTopScore(array) {
-  document.getElementById('top1').innerHTML = '<span class="top-name">' + array[0].name + '</span><span class="top-score"> ' + array[0].score + '</span>';
-  document.getElementById('top2').innerHTML = '<span class="top-name">' + array[1].name + '</span><span class="top-score"> ' + array[1].score + '</span>';
-  document.getElementById('top3').innerHTML = '<span class="top-name">' + array[2].name + '</span><span class="top-score"> ' + array[2].score + '</span>';
+  document.querySelector('#top1 .top-name').innerHTML = array[0].name;
+  document.querySelector('#top1 .top-score').innerHTML = array[0].score;
+  document.querySelector('#top2 .top-name').innerHTML = array[1].name;
+  document.querySelector('#top2 .top-score').innerHTML = array[1].score;
+  document.querySelector('#top3 .top-name').innerHTML = array[2].name;
+  document.querySelector('#top3 .top-score').innerHTML = array[2].score;
 }
 
 $(document).ready(function (e) {
