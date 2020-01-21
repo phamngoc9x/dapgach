@@ -51,14 +51,14 @@ function drawImages(score) {
     manaSrc = 'asset/mana2.png';
     coreValue = 'Thing outside the box';
     speed = 700;
-    fallSpeed = 10;
+    fallSpeed = 7;
     soundTrack.playbackRate = .8;
   }
   else if (score > 60 && score <= 90) {
     manaSrc = 'asset/mana3.png';
     coreValue = 'Get risky';
     speed = 500;
-    fallSpeed = 15;
+    fallSpeed = 10;
     soundTrack.playbackRate = .85;
   }
   else if (score > 90 && score <= 1200) {
@@ -66,25 +66,26 @@ function drawImages(score) {
     coreValue = 'Be optimistic';
     speed = 400;
     soundTrack.playbackRate = .9;
-    fallSpeed = 20;
+    fallSpeed = 12;
   }
   else if (score > 120 && score <= 150) {
     manaSrc = 'asset/mana5.png';
     coreValue = 'Go fast';
     speed = 300;
     soundTrack.playbackRate = .95;
-    fallSpeed = 25;
+    fallSpeed = 15;
   }
   else if (score > 150 && score <= 180) {
     manaSrc = 'asset/mana6.png';
     coreValue = 'Be professional';
     speed = 200;
     soundTrack.playbackRate = 1;
-    fallSpeed = 30;
+    fallSpeed = 18;
   }
   else if (score > 180) {
     manaSrc = 'asset/mana7.png';
     coreValue = 'Stay focus';
+    fallSpeed = 20;
     speed = 100;
   }
   document.querySelector('.slogan').innerHTML = coreValue;

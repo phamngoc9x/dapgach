@@ -51,7 +51,8 @@ body {
   background-image: url(./asset/frame.jpg);
 }
 .game-zone {
-  border: 5px solid #edb543;
+  border-top: 5px solid #edb543;
+  background-color: rgba(255, 255, 255, .5);
   border-radius: 4px;
   max-width: 100%;
   z-index: 1;
@@ -68,6 +69,7 @@ body {
   background-size: cover;
   align-items: center;
   justify-content: center;
+  border-radius: 4px;
 }
 
 .slogan {
@@ -83,12 +85,15 @@ body {
 }
 .col-right {
   padding: 10px;
+  padding-left: 0;
   flex: 0 0 270px;
   z-index: 2;
 }
 .level-image__item {
   transition: all 0.5s;
   animation: scale 2s infinite;
+  max-width: 100%;
+  height: auto;
 }
 .banner {
   max-width: 100%;
@@ -96,9 +101,9 @@ body {
   max-height: 100px;
 }
 @keyframes scale {
-  0%   { transform: scale(1.1); }
+  0%   { transform: scale(1.05); }
   50% { transform: scale(1); }
-  100% { transform: scale(1.1); }
+  100% { transform: scale(1.05); }
 }
 
 .sounds audio {
@@ -171,11 +176,28 @@ body {
 
 .info-user {
   display: none;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+  border-top: 5px solid #edb543;
+  border-radius: 4px;
+  padding: 10px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, .5);
+}
+
+.top-list {
+  border-top: 5px solid #edb543;
+  border-radius: 4px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, .5);
 }
 
 h1, h2, h3, h4 {
   margin-top: 0;
+  margin-bottom: 5px;
+}
+
+ul {
+  margin: 0;
 }
 
 .result-board {
