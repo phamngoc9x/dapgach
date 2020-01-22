@@ -7,88 +7,95 @@
 	<title>Nhận lì xì</title>
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap&subset=vietnamese" rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
+	<link rel="icon" href="./asset/favicon.ico">
 </head>
 <body>
 	<main>
-			<div class="container">
-					<div class="main-content">
-							<div class="col-left">
-								<div class="core-value">
-										<h4 class='slogan'>Happy new year</h4>
-								</div>
-								<div class="game-zone">
-									<!-- <img src="asset/mock.png" class="mockup-phone" alt=""> -->
-									<!-- <img src="asset/dienthoai.png" class="mockup-phone" alt=""> -->
-									<canvas id="canvas"></canvas>
-									<form class="form-regis">
-										<label>Enter name to play</label>
-										<input type="text" placeholder="Ex: Nguyen Trung Dung B" />
-										<p class="mess-error d-none">Name can't be empty!</p>
-										<button class="btn-start" id="playbutton">Start</button>
-									</form>
-									<div class="result-board">
-										<img src="asset/gameover.gif" alt="Game over" />
-										<button class="btn-replay" id="replay-button">
-											<img src="./asset/replay.png" alt="replay icon" />
-											<span>Replay</span>
-										</button>
-									</div>
+		<div class="container">
+				<div class="main-content">
+						<div class="col-left">
+							<div class="core-value">
+									<h4 class='slogan'>Happy new year</h4>
+							</div>
+							<div class="game-zone">
+								<!-- <img src="asset/mock.png" class="mockup-phone" alt=""> -->
+								<!-- <img src="asset/dienthoai.png" class="mockup-phone" alt=""> -->
+								<canvas id="canvas"></canvas>
+								<form class="form-regis">
+									<label>Enter name to play</label>
+									<input type="text" placeholder="Ex: Nguyen Trung Dung B" />
+									<p class="mess-error d-none">Name can't be empty!</p>
+									<button class="btn-start" id="playbutton">Start</button>
+								</form>
+								<div class="result-board">
+									<img src="asset/gameover.gif" alt="Game over" />
+									<button class="btn-replay" id="replay-button">
+										<img src="./asset/replay.png" alt="replay icon" />
+										<span>Replay</span>
+									</button>
 								</div>
 							</div>
-							<div class="col-right">
-                <div class="info-user">
-                  <h3><span class="name"></span></h3>
-                  <p>Score: <span class="score">0</span></p>
-                  <p>Life: <span class="life">3</span></p>
-                </div>
+						</div>
+						<div class="col-right">
+							<div class="info-user">
+								<h3><span class="name"></span></h3>
+								<p>Score: <span class="score">0</span></p>
+								<p>Life: <span class="life">3</span></p>
+							</div>
 
-								<div class="top-list">
-									<h3>Top điểm cao</h3>
-									<ol class="no-bullets">
-										<li id='top1'>
-											<img class="top-list__icon" src="./asset/first.png" alt="firts">
-											<div>
-												<p class="top-name">???</p>
-												<p class="top-score">0</p>
-											</div>
-										</li>
-										<li id='top2'>
-											<img class="top-list__icon" src="./asset/second.png" alt="firts">
-											<div>
-												<p class="top-name">???</p>
-												<p class="top-score">0</p>
-											</div>
-										</li>
-										<li id='top3'>
-											<img class="top-list__icon" src="./asset/third.png" alt="firts">
-											<div>
-												<p class="top-name">???</p>
-												<p class="top-score">0</p>
-											</div>
-										</li>
-									</ol>
-								</div>
-								<div class="level-image">
-									<img src="asset/mana1.png" id="im1" height="auto" class="level-image__item"/>
-								</div>
-								<!-- <button id="playbutton" onclick="playButtonClicked();">Play</button> -->
+							<div class="top-list">
+								<h3>Top điểm cao</h3>
+								<ol class="no-bullets">
+									<li id='top1'>
+										<img class="top-list__icon" src="./asset/first.png" alt="firts">
+										<div>
+											<p class="top-name">???</p>
+											<p class="top-score">0</p>
+										</div>
+									</li>
+									<li id='top2'>
+										<img class="top-list__icon" src="./asset/second.png" alt="firts">
+										<div>
+											<p class="top-name">???</p>
+											<p class="top-score">0</p>
+										</div>
+									</li>
+									<li id='top3'>
+										<img class="top-list__icon" src="./asset/third.png" alt="firts">
+										<div>
+											<p class="top-name">???</p>
+											<p class="top-score">0</p>
+										</div>
+									</li>
+								</ol>
 							</div>
-					</div>
-			</div>
-			<div class="sounds">
-				<audio id="audio-soundtrack">
-					<source src="asset/nhac_nen.mp3" type="audio/mp3">
-				</audio>
-				<audio id="audio-catch">
-					<source src="asset/catch.mp3" type="audio/mp3">
-				</audio>
-				<audio id="audio-fail">
-					<source src="asset/fail.mp3" type="audio/mp3">
-				</audio>
-				<audio id="audio-lvup">
-					<source src="asset/lv_up.mp3" type="audio/mp3">
-				</audio>
-			</div>
+							<div class="level-image">
+								<img src="asset/mana1.png" id="im1" height="auto" class="level-image__item"/>
+							</div>
+							<!-- <button id="playbutton" onclick="playButtonClicked();">Play</button> -->
+						</div>
+				</div>
+		</div>
+		<div class="sounds">
+			<audio id="audio-soundtrack">
+				<source src="asset/nhac_nen.mp3" type="audio/mp3">
+			</audio>
+			<audio id="audio-catch">
+				<source src="asset/catch.mp3" type="audio/mp3">
+			</audio>
+			<audio id="audio-fail">
+				<source src="asset/fail.mp3" type="audio/mp3">
+			</audio>
+			<audio id="audio-lvup">
+				<source src="asset/lv_up.mp3" type="audio/mp3">
+			</audio>
+		</div>
+
+		<div class="sound-control">
+			<p class="sound-control__guide">Shift + Z</p>
+			<img class="sound-on d-block" src="./asset/soundOn.png" alt="sound on">
+			<img class="sound-off d-none" src="./asset/soundOff.png" alt="sound off">
+		</div>
   </main>
 
 
