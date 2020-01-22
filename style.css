@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Silva_Roicamonta;
+  src: url('asset/Silva_Roicamonta.ttf');
+}
+
 * {
   box-sizing: border-box;
 }
@@ -77,7 +82,8 @@ body {
 }
 
 .slogan {
-  font-size: 24px;
+  font-family: Silva_Roicamonta;
+  font-size: 30px;
   margin: 0;
   color: white;
 }
