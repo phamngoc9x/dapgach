@@ -12,7 +12,7 @@ var coreValue ='Be a team';
 var manaSrc = 'asset/mana1.png';
 var score = 0;
 var life = 3;
-var fallSpeed = 5;
+var fallSpeed = 3;
 var speed = 1000;
 const soundTrack = document.getElementById('audio-soundtrack');
 const catchSound = document.getElementById('audio-catch');
@@ -51,21 +51,21 @@ function drawImages(score) {
     manaSrc = 'asset/mana1.png';
     coreValue = 'Be a team';
     speed = 1000;
-    fallSpeed = 7;
+    fallSpeed = 4;
     soundTrack.playbackRate = .8;
   }
   else if (score >= 20 && score < 40) {
     manaSrc = 'asset/mana2.png';
     coreValue = 'Thing outside the box';
     speed = 1000;
-    fallSpeed = 7;
+    fallSpeed = 6;
     soundTrack.playbackRate = .8;
   }
   else if (score >= 40 && score < 60) {
     manaSrc = 'asset/mana3.png';
     coreValue = 'Get risky';
     speed = 900;
-    fallSpeed = 10;
+    fallSpeed = 8;
     soundTrack.playbackRate = .85;
   }
   else if (score >= 60 && score < 80) {
@@ -73,47 +73,47 @@ function drawImages(score) {
     coreValue = 'Be optimistic';
     speed = 800;
     soundTrack.playbackRate = .9;
-    fallSpeed = 12;
+    fallSpeed = 10;
   }
   else if (score >= 80 && score < 100) {
     manaSrc = 'asset/mana5.png';
     coreValue = 'Go fast';
     speed = 700;
     soundTrack.playbackRate = .95;
-    fallSpeed = 14;
+    fallSpeed = 12;
   }
   else if (score >= 100 && score < 120) {
     manaSrc = 'asset/mana6.png';
     coreValue = 'Be professional';
     speed = 600;
     soundTrack.playbackRate = 1;
-    fallSpeed = 16;
+    fallSpeed = 14;
   }
   else if (score >= 120 && score < 140) {
     manaSrc = 'asset/mana7.png';
     coreValue = 'Stay focus';
     speed = 500;
     soundTrack.playbackRate = 1;
-    fallSpeed = 18;
+    fallSpeed = 16;
   }
   else if (score >= 140 && score < 160) {
-    manaSrc = 'asset/mana1.png';
+    manaSrc = 'asset/mana8.png';
     coreValue = 'Be a team';
     speed = 400;
     soundTrack.playbackRate = 1;
-    fallSpeed = 20;
+    fallSpeed = 18;
   }
   else if (score >= 160 && score < 180) {
-    manaSrc = 'asset/mana2.png';
+    manaSrc = 'asset/mana9.png';
     coreValue = 'Thing outside the box';
     speed = 300;
     soundTrack.playbackRate = 1;
-    fallSpeed = 22;
+    fallSpeed = 20;
   }
   else if (score >= 180) {
-    manaSrc = 'asset/mana3.png';
+    manaSrc = 'asset/mana10.png';
     coreValue = 'Get risky';
-    fallSpeed = 24;
+    fallSpeed = 22;
     speed = 200;
   }
   document.querySelector('.slogan').innerHTML = coreValue;
