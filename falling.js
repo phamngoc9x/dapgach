@@ -18,6 +18,7 @@ const soundTrack = document.getElementById('audio-soundtrack');
 const catchSound = document.getElementById('audio-catch');
 const catchFailSound = document.getElementById('audio-fail');
 const lvUpSound = document.getElementById('audio-lvup');
+const sounds = [soundTrack, catchSound, catchFailSound, lvUpSound];
 const breakpoint = [30, 60, 90, 120, 150, 180];
 soundTrack.volume = .3;
 soundTrack.loop = true;
@@ -330,6 +331,14 @@ window.onkeypress = function(e) {
   if (e.keyCode === 13 && document.querySelector('.result-board.show #replay-button')) {
     replay()
   }
+
+  if (e.keyCode === 90 && e.shiftKey) {
+    if ($('.sound-control .sound-on').hasClass('d-block')) {
+      soundOff()
+    } else {
+      soundOn()
+    }
+  }
 };
 
 function setTopScore(setScore, score, name) {
@@ -379,13 +388,31 @@ function setTopScore(setScore, score, name) {
 }
 
 function showTopScore(array) {
-  document.querySelector('#top1 .top-name').innerHTML = array[0].name;
-  document.querySelector('#top1 .top-score').innerHTML = array[0].score;
-  document.querySelector('#top2 .top-name').innerHTML = array[1].name;
-  document.querySelector('#top2 .top-score').innerHTML = array[1].score;
-  document.querySelector('#top3 .top-name').innerHTML = array[2].name;
-  document.querySelector('#top3 .top-score').innerHTML = array[2].score;
+  for (let i = 0; i <= 2; i++) {
+    document.querySelector('#top' + (i + 1) + ' .top-name').innerHTML = array[i].name;
+    document.querySelector('#top' + (i + 1) + ' .top-score').innerHTML = array[i].score;
+  }
 }
+
+function soundOff() {
+  $('.sound-on').removeClass('d-block').addClass('d-none');
+  $('.sound-off').removeClass('d-none').addClass('d-block');
+  sounds.forEach(sound => sound.muted = true)
+}
+
+function soundOn() {
+  $('.sound-on').removeClass('d-none').addClass('d-block');
+  $('.sound-off').removeClass('d-block').addClass('d-none');
+  sounds.forEach(sound => sound.muted = false)
+}
+
+$('.sound-on').on('click', function () {
+  soundOff()
+});
+
+$('.sound-off').on('click', function () {
+  soundOn()
+});
 
 $(document).ready(function (e) {
   // if (localStorage.getItem('topScore') == null) {
