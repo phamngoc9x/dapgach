@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Silva_Roicamonta;
+  src: url('asset/Silva_Roicamonta.ttf');
+}
+
 * {
   box-sizing: border-box;
 }
@@ -77,7 +82,8 @@ body {
 }
 
 .slogan {
-  font-size: 24px;
+  font-family: Silva_Roicamonta;
+  font-size: 30px;
   margin: 0;
   color: white;
 }
@@ -96,7 +102,7 @@ body {
 .level-image__item {
   transition: all 0.5s;
   animation: scale 2s infinite;
-  width: 85%;
+  width: 82%;
   display: block;
   margin: 0 auto;
   height: auto;
@@ -343,4 +349,106 @@ ul {
   transform: translate(-50%, -50%);
   cursor: pointer;
   height: 22px;
+}
+
+.btn-show-info-page {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 14px;
+  text-align: center;
+  color: #ecbf5c;
+  cursor: pointer;
+}
+
+.btn-show-info-page img {
+  width: 14px;
+}
+
+.info-page {
+  height: 100vh;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 99;
+  background-color: white;
+  transition: .6s;
+}
+
+.info-page.hide {
+  top: -100vh;
+  transition: .6s;
+}
+
+.info-page .background {
+  height: calc(200vh / 3);
+  background-image: url('./asset/bg2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.info-page .member,
+.info-page .guide {
+  height: calc(50% - 30px);
+  padding: 24px 0 24px 24px;
+}
+
+.info-page .member-wrap,
+.info-page .guide-wrap {
+  max-height: 100%;
+  padding-right: 24px;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.info-page .member-wrap::-webkit-scrollbar,
+.info-page .guide-wrap::-webkit-scrollbar {
+  width: 8px;
+}
+
+.info-page .member-wrap::-webkit-scrollbar-track,
+.info-page .guide-wrap::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.info-page .member-wrap::-webkit-scrollbar-thumb,
+.info-page .guide-wrap::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.info-page .member-wrap::-webkit-scrollbar-thumb:hover,
+.info-page .guide-wrap::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.info-page .group {
+  height: calc(100vh / 3);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('./asset/frontend.jpg');
+}
+
+.info-page .play {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-page .play button {
+  border: 0;
+  border-radius: 3px;
+  background-color: #dc3544;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.info-page .play button:hover {
+  background-color: #e00d21;
 }
