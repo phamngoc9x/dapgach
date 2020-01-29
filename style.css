@@ -72,7 +72,7 @@ body {
   display: flex;
   height: 80px;
   margin-bottom: 10px;
-  background-image: url(asset/banner1.png);
+  background-image: url(asset/bg-banner.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -85,13 +85,23 @@ body {
   font-family: Silva_Roicamonta;
   font-size: 30px;
   margin: 0;
-  color: white;
+  color: #ce3a2c;
+}
+
+.team-title {
+  font-family: Silva_Roicamonta;
+  font-size: 44px;
+  margin: 0;
+  color: #ce3a2c;
+  position: absolute;
+  top: 485px;
 }
 
 .col-left {
   flex: 0 0 100px;
   z-index: 1;
   padding: 10px;
+  position: relative;
 }
 .col-right {
   padding: 10px;
@@ -126,7 +136,7 @@ body {
 }
 
 .top-list h3 {
-  color: #dc3544;
+  color: #ce3a2c;
   margin-bottom: 8px;
 }
 
@@ -178,7 +188,7 @@ body {
   margin-bottom: 20px;
   display: block;
   text-align: center;
-  color: #dc3544;
+  color: #ce3a2c;
 }
 
 .form-regis input {
@@ -443,7 +453,7 @@ ul {
 .info-page .play button {
   border: 0;
   border-radius: 3px;
-  background-color: #dc3544;
+  background-color: #ce3a2c;
   color: white;
   padding: 10px 20px;
   cursor: pointer;
