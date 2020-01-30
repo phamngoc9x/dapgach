@@ -414,9 +414,6 @@ ul {
   height: 100%;
   z-index: 99;
   color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   text-align: center;
 }
 
@@ -434,7 +431,7 @@ ul {
   color: #dc3545;
 }
 
-.content-wrap h3 { 
+.content-wrap h3 {
   font-size: 16px;
 }
 
@@ -461,12 +458,65 @@ ul {
   border: 0;
   border-radius: 3px;
   background-color: #dc3544;
+  box-shadow: 0px 0px 14px #be9c9f;
   color: white;
-  padding: 10px 20px;
+  padding: 16px 24px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 24px;
 }
 
 .info-page .play button:hover {
   background-color: #e00d21;
+}
+
+.gif-tutorial {
+  margin: 30px auto;
+  max-width: 70%;
+}
+
+.footer {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: baseline;
+  align-content: center;
+}
+
+.footer .wrap {
+  width: 70%;
+  display: flex;
+  text-align: center;
+}
+
+.col {
+  width: 33.33%;
+}
+
+.col > h2 {
+  font-size: 18px;
+}
+
+.col > h3 {
+  font-size: 14px;
+}
+
+@media(max-height: 700px) {
+  .gif-tutorial {
+    margin: 30px auto;
+    max-width: 62vw;
+    max-height: 60vh;
+  }
+
+  .col > h2 {
+    font-size: 16px;
+  }
+
+  .col > h3 {
+    font-size: 12px;
+  }
+
+  .info-page .play button {
+    font-size: 20px;
+    padding: 12px 20px;
+  }
 }
