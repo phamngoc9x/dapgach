@@ -471,7 +471,8 @@ ul {
 
 .gif-tutorial {
   margin: 30px auto;
-  max-width: 70%;
+  max-width: 62vw;
+  max-height: 70vh;
 }
 
 .footer {
@@ -483,7 +484,8 @@ ul {
 }
 
 .footer .wrap {
-  width: 70%;
+  width: 55%;
+  max-width: 100vh;
   display: flex;
   text-align: center;
 }
@@ -500,11 +502,10 @@ ul {
   font-size: 14px;
 }
 
-@media(max-height: 700px) {
+@media(max-height: 650px) {
   .gif-tutorial {
-    margin: 30px auto;
-    max-width: 62vw;
-    max-height: 60vh;
+    margin: 20px auto 15px;
+    max-width: 52vw;
   }
 
   .col > h2 {
@@ -518,5 +519,15 @@ ul {
   .info-page .play button {
     font-size: 20px;
     padding: 12px 20px;
+  }
+
+  .footer .wrap {
+    max-width: fit-content;
+  }
+}
+
+@media(max-width: 1440px) and (max-height:650px) {
+  .gif-tutorial {
+    max-width: 58vw;
   }
 }
