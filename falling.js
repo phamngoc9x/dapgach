@@ -48,19 +48,11 @@ var topScore = [
 ];
 
 function drawImages(score) {
-<<<<<<< HEAD
-  var number = Math.round(Math.random() * 10 );
-  if(number=== 0) {
-    number = 1;
-  }
-=======
   var number = 0;
   do {
     number = Math.round(Math.random() * 10 );
   }
   while (number == 0);
-  console.log(number)
->>>>>>> e415073d573a2279d99f0a3c5c31a8e6f517f420
   if (score < 20) {
     manaSrc = 'asset/mana1.png';
     coreValue = 'Be a team';

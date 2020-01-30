@@ -58,6 +58,7 @@ body {
   background-size: cover;
   display: flex;
   background-image: url(./asset/frame.jpg);
+  cursor: pointer;
 }
 .game-zone {
   border-top: 5px solid #edb543;
