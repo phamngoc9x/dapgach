@@ -49,6 +49,9 @@ var topScore = [
 
 function drawImages(score) {
   var number = Math.round(Math.random() * 10 );
+  if(number=== 0) {
+    number = 1;
+  }
   if (score < 20) {
     manaSrc = 'asset/mana1.png';
     coreValue = 'Be a team';
@@ -93,7 +96,7 @@ function drawImages(score) {
   }
   else if (score == 120) {
     manaSrc = 'asset/mana'+ number +'.png';
-    coreValue = 'Stay focus';
+    coreValue = 'Stay focused';
     speed = 500;
     soundTrack.playbackRate = 1;
     fallSpeed = 16;
