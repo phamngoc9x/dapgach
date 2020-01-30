@@ -48,7 +48,12 @@ var topScore = [
 ];
 
 function drawImages(score) {
-  var number = Math.round(Math.random() * 10 );
+  var number = 0;
+  do {
+    number = Math.round(Math.random() * 10 );
+  }
+  while (number == 0);
+  console.log(number)
   if (score < 20) {
     manaSrc = 'asset/mana1.png';
     coreValue = 'Be a team';
@@ -107,7 +112,7 @@ function drawImages(score) {
   }
   else if (score == 160) {
     manaSrc = 'asset/mana'+ number +'.png';
-    coreValue = 'Thing outside the box';
+    coreValue = 'Think outside the box';
     speed = 300;
     soundTrack.playbackRate = 1;
     fallSpeed = 20;
