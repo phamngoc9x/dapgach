@@ -93,7 +93,7 @@ function drawImages(score) {
   }
   else if (score == 120) {
     manaSrc = 'asset/mana'+ number +'.png';
-    coreValue = 'Stay focus';
+    coreValue = 'Stay focused';
     speed = 500;
     soundTrack.playbackRate = 1;
     fallSpeed = 16;
