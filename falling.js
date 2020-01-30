@@ -124,7 +124,7 @@ function drawImages(score) {
 
 
 $(document).mousemove(function (e) {
-  dude.Position.X = e.pageX;
+  dude.Position.X = e.pageX - (($(window).width() - 750)/2);
 })
 
 
