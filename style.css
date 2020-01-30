@@ -421,8 +421,20 @@ ul {
 }
 
 .info-page .content-wrap {
-  max-height: 300px;
   overflow-y: auto;
+  padding: 40px;
+  background: rgba(0,0,0,0.5);
+  box-shadow: 0 3px 20px rgba(0,0,0,0.5);
+  min-width: 650px;
+  border-radius: 4px;
+}
+
+.content-wrap h2 {
+  margin-bottom: 15px;
+}
+
+.content-wrap h3 { 
+  font-size: 16px;
 }
 
 .info-page .content-wrap::-webkit-scrollbar {
@@ -438,7 +450,7 @@ ul {
 }
 
 .info-page .play {
-  margin-top: 60px;
+  margin-top: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
