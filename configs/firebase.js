@@ -31,11 +31,29 @@ function subscribeScores(callback) {
     })
 }
 
-function addRecord({ name, score }) {
-  userCollection
-    .add({
-      name,
-      score,
-      createdDate: timeNowFirebase(),
-    })
+async function addRecord({ name, score }) {
+  const user = (await userCollection
+    .where('name', '==', name)
+    .orderBy('score', 'desc')
+    .limit(1)
+    .get()).docs[0]
+
+  if (user) {
+    userCollection
+      .doc(user.id)
+      .update({
+        score,
+        play: (user.data().play || 0) + 1,
+        updatedDate: timeNowFirebase(),
+      })
+  } else {
+    userCollection
+      .add({
+        name,
+        score,
+        play: 1,
+        createdDate: timeNowFirebase(),
+        updatedDate: timeNowFirebase(),
+      })
+  }
 }
