@@ -162,6 +162,8 @@ function Shape(posX, width, height) {
 
   this.checkCollisions = function () {
     if (this.Position.Y >= screenHeight) {
+      catchFailSound.pause();
+      catchFailSound.currentTime = 0;
       catchFailSound.play();
       delete shapes[this.Index];
       life--;
@@ -218,6 +220,8 @@ function Dude(posX, width, height) {
         a.Position.X + a.Width >= b.Position.X &&
         a.Position.Y + a.Height >= b.Position.Y &&
         a.Position.Y <= b.Position.Y + b.Height) {
+        catchSound.pause();
+        catchSound.currentTime = 0;
         catchSound.play();
         return true
       }
