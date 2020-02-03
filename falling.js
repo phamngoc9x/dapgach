@@ -227,7 +227,7 @@ function Dude(posX, width, height) {
         return true
       }
     }
-    for (i in shapes) {
+    for (let i in shapes) {
       if (collision(this, shapes[i])) {
         delete shapes[i];
         score++;
@@ -286,7 +286,7 @@ function shapeGenerate() {
 
 function Updater() {
   ctx.clearRect(0, 0, screenWidth, screenHeight);
-  for (i in shapes) {
+  for (let i in shapes) {
     shapes[i].update();
   }
   dude.update();
