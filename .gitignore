@@ -66,3 +66,6 @@ node_modules/
 key.json
 server.js
 user.json
+user2.json
+dist
+.cache

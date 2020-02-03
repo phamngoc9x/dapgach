@@ -22,7 +22,7 @@ function timeNowFirebase() {
   return getTimestampFirebase(Date.now())
 }
 
-function subscribeScores(callback) {
+export function subscribeScores(callback) {
   userCollection
     .orderBy('score', 'desc')
     .limit(3)
@@ -31,7 +31,7 @@ function subscribeScores(callback) {
     })
 }
 
-async function addRecord({ name, score }) {
+export async function addRecord({ name, score }) {
   const user = (await userCollection
     .where('name', '==', name)
     .orderBy('score', 'desc')
@@ -44,6 +44,7 @@ async function addRecord({ name, score }) {
       .update({
         score,
         play: (user.data().play || 0) + 1,
+        prev: user.data().updatedDate,
         updatedDate: timeNowFirebase(),
       })
   } else {

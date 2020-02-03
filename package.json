@@ -1,0 +1,32 @@
+{
+  "name": "dapgach",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000d\u0000a\u0000p\u0000g\u0000a\u0000c\u0000h\u0000\r\u0000 \u0000",
+  "main": "falling.js",
+  "dependencies": {
+    "firebase-admin": "^8.9.2",
+    "parcel": "^1.12.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "parcel": "parcel falling.js",
+    "parcel:build": "parcel build falling.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phamngoc9x/dapgach.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phamngoc9x/dapgach/issues"
+  },
+  "homepage": "https://github.com/phamngoc9x/dapgach#readme"
+}

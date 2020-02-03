@@ -1,4 +1,5 @@
 // Global Variables
+import { subscribeScores, addRecord } from './configs/firebase'
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 var screenHeight = 480;
@@ -8,7 +9,7 @@ var shapeIndex = 0;
 var dudeWidth = 70;
 var dudeHeight = 35;
 var dudeSrc = 'asset/bag.png';
-var coreValue ='Be a team';
+var coreValue = 'Be a team';
 var manaSrc = 'asset/mana1.png';
 var score = 0;
 var life = 3;
@@ -50,7 +51,7 @@ var topScore = [
 function drawImages(score) {
   var number = 0;
   do {
-    number = Math.round(Math.random() * 10 );
+    number = Math.round(Math.random() * 10);
   }
   while (number == 0);
   if (score < 20) {
@@ -60,64 +61,64 @@ function drawImages(score) {
     fallSpeed = 4;
     soundTrack.playbackRate = .8;
   }
-  else if (score == 20 ) {
+  else if (score == 20) {
     manaSrc = 'asset/mana2.png';
     coreValue = 'Think outside the box';
     speed = 1000;
     fallSpeed = 6;
     soundTrack.playbackRate = .8;
   }
-  else if (score == 40 ) {
-    manaSrc = 'asset/mana'+ number +'.png';
+  else if (score == 40) {
+    manaSrc = 'asset/mana' + number + '.png';
     coreValue = 'Get risky';
     speed = 900;
     fallSpeed = 8;
     soundTrack.playbackRate = .85;
   }
-  else if (score == 60 ) {
-    manaSrc = 'asset/mana'+ number +'.png';
+  else if (score == 60) {
+    manaSrc = 'asset/mana' + number + '.png';
     coreValue = 'Be optimistic';
     speed = 800;
     soundTrack.playbackRate = .9;
     fallSpeed = 10;
   }
   else if (score == 80) {
-    manaSrc = 'asset/mana'+ number +'.png';
+    manaSrc = 'asset/mana' + number + '.png';
     coreValue = 'Go fast';
     speed = 700;
     soundTrack.playbackRate = .95;
     fallSpeed = 12;
   }
   else if (score == 100) {
-    manaSrc = 'asset/mana'+ number +'.png';
+    manaSrc = 'asset/mana' + number + '.png';
     coreValue = 'Be professional';
     speed = 600;
     soundTrack.playbackRate = 1;
     fallSpeed = 14;
   }
   else if (score == 120) {
-    manaSrc = 'asset/mana'+ number +'.png';
+    manaSrc = 'asset/mana' + number + '.png';
     coreValue = 'Stay focused';
     speed = 500;
     soundTrack.playbackRate = 1;
     fallSpeed = 16;
   }
   else if (score == 140) {
-    manaSrc = 'asset/mana'+ number +'.png';
+    manaSrc = 'asset/mana' + number + '.png';
     coreValue = 'Be a team';
     speed = 400;
     soundTrack.playbackRate = 1;
     fallSpeed = 18;
   }
   else if (score == 160) {
-    manaSrc = 'asset/mana'+ number +'.png';
+    manaSrc = 'asset/mana' + number + '.png';
     coreValue = 'Think outside the box';
     speed = 300;
     soundTrack.playbackRate = 1;
     fallSpeed = 20;
   }
   else if (score == 180) {
-    manaSrc = 'asset/mana'+ number +'.png';
+    manaSrc = 'asset/mana' + number + '.png';
     coreValue = 'Get risky';
     fallSpeed = 22;
     speed = 200;
@@ -128,7 +129,7 @@ function drawImages(score) {
 
 
 $(document).mousemove(function (e) {
-  dude.Position.X = e.pageX - (($(window).width() - 750)/2);
+  dude.Position.X = e.pageX - (($(window).width() - 750) / 2);
 })
 
 
@@ -336,7 +337,7 @@ $('#replay-button').on('click', function () {
   replay()
 });
 
-window.onkeypress = function(e) {
+window.onkeypress = function (e) {
   if (e.keyCode === 13 && document.querySelector('.result-board.show #replay-button')) {
     replay()
   }
@@ -423,24 +424,24 @@ $('.sound-off').on('click', function () {
   soundOn()
 });
 
-$('.js-click-to-play-btn').on('click', function() {
+$('.js-click-to-play-btn').on('click', function () {
   $('.info-page').addClass('hide')
 });
 
-$('.js-show-info-page-btn').on('click', function() {
+$('.js-show-info-page-btn').on('click', function () {
   $('.info-page').removeClass('hide')
 })
 
-$(document).ready(function (e) {
-  // if (localStorage.getItem('topScore') == null) {
-  //   top = localStorage.setItem('topScore', JSON.stringify(topScore));
-  //   setScore = JSON.parse(localStorage.getItem('topScore'));
-  // } else {
-  //   setScore = JSON.parse(localStorage.getItem('topScore'));
-  // }
+// $(document).ready(function (e) {
+// if (localStorage.getItem('topScore') == null) {
+//   top = localStorage.setItem('topScore', JSON.stringify(topScore));
+//   setScore = JSON.parse(localStorage.getItem('topScore'));
+// } else {
+//   setScore = JSON.parse(localStorage.getItem('topScore'));
+// }
 
-  subscribeScores(scores => {
-    showTopScore(scores)
-  })
+subscribeScores(scores => {
+  showTopScore(scores)
+})
 
-});
+// });
