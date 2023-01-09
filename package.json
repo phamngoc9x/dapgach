@@ -4,7 +4,7 @@
   "description": "��#\u0000 \u0000d\u0000a\u0000p\u0000g\u0000a\u0000c\u0000h\u0000\r\u0000 \u0000",
   "main": "falling.js",
   "dependencies": {
-    "firebase-admin": "^8.9.2",
+    "firebase-admin": "^11.4.1",
     "parcel": "^1.12.4"
   },
   "devDependencies": {
